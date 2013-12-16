@@ -7,12 +7,97 @@
       <div class="config"><strong>Source system: </strong> [../data/cms_extract-prod.xml]<br /><strong>Target system: </strong> [../data/cms_extract-test.xml]
       </div>
       <div class="site">
-         <h3>Site: Enonic Travels</h3>
+         <h3>Site: II</h3>
          <div class="portlet">
-            <h3>Portlet: Portlet welcome</h3>
+            <h3>Portlet: articlesection-content</h3>
+            <div class="datasource">
+               <h3>getContentBySection</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKeys</td>
+                     <td>${select(portal.pageKey,-1)}</td>
+                     <td>${select(portal.pageKey,-1)}</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype='ArticleSection'</td>
+                     <td>contenttype='ArticleSection'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td>10</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>2</td>
+                     <td>2</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+               </table>
+            </div>
          </div>
          <div class="portlet">
-            <h3>Portlet: Document show</h3>
+            <h3>Portlet: article-content</h3>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKey</td>
+                     <td>${portal.pageKey}</td>
+                     <td>${portal.pageKey}</td>
+                  </tr>
+                  <tr>
+                     <td>includeTopLevel</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>startLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+               </table>
+            </div>
             <div class="datasource">
                <h3>getContent</h3>
                <table>
@@ -22,9 +107,9 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
+                     <td>contentKeys</td>
+                     <td>${select(param.key,-1)}</td>
+                     <td>${select(param.key,-1)}</td>
                   </tr>
                   <tr>
                      <td>query</td>
@@ -32,19 +117,19 @@
                      <td></td>
                   </tr>
                   <tr>
-                     <td>orderby</td>
+                     <td>orderBy</td>
                      <td></td>
                      <td></td>
                   </tr>
                   <tr>
                      <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
                   </tr>
-                  <tr class="error">
+                  <tr>
                      <td>count</td>
                      <td>1</td>
-                     <td>123</td>
+                     <td>1</td>
                   </tr>
                   <tr>
                      <td>includeData</td>
@@ -65,11 +150,81 @@
             </div>
          </div>
          <div class="portlet">
-            <h3>Portlet: Portlet example</h3>
+            <h3>Portlet: top-menu</h3>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKey</td>
+                     <td>${portal.pageKey}</td>
+                     <td>${portal.pageKey}</td>
+                  </tr>
+                  <tr>
+                     <td>includeTopLevel</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>startLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr class="error">
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>2</td>
+                  </tr>
+               </table>
+            </div>
          </div>
          <div class="portlet">
             <h3>Portlet: Formbuilder</h3>
             <div class="datasource">
+               <h3>getMenuBranch</h3>Result element: mainmenu
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKey</td>
+                     <td>${portal.pageKey}</td>
+                     <td>${portal.pageKey}</td>
+                  </tr>
+                  <tr>
+                     <td>includeTopLevel</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>startLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getSessionContext</h3>Result element: context
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+               </table>
+            </div>
+            <div class="datasource">
                <h3>getMenuItem</h3>
                <table>
                   <thead>
@@ -79,24 +234,32 @@
                   </thead>
                   <tr>
                      <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
+                     <td>${select(param.id, '-1')}</td>
+                     <td>${select(param.id, '-1')}</td>
                   </tr>
                   <tr>
                      <td>withParents</td>
                      <td>false</td>
                      <td>false</td>
                   </tr>
-                  <tr>
-                     <td>details</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
                </table>
             </div>
          </div>
          <div class="portlet">
-            <h3>Portlet: Destination show</h3>
+            <h3>Portlet: social-nav</h3>
+            <div class="datasource">
+               <h3>getSessionContext</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: Image</h3>
             <div class="datasource">
                <h3>getContent</h3>
                <table>
@@ -106,277 +269,19 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
+                     <td>contentKeys</td>
+                     <td>${select(param.key,-1)}</td>
+                     <td>${select(param.key,-1)}</td>
                   </tr>
                   <tr>
                      <td>query</td>
                      <td></td>
                      <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>data</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Destination list</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'destination'</td>
-                     <td>contenttype = 'destination'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>${select(param.index, 0)}</td>
-                     <td>${select(param.index, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Destination mini list</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${select(param.articleSectionId, select(param.id, -1))}</td>
-                     <td>${select(param.articleSectionId, select(param.id, -1))}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'destination'</td>
-                     <td>contenttype = 'destination'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>3</td>
-                     <td>3</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Banner frontpage</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Sitemap</h3>
-            <div class="datasource">
-               <h3>getMenu</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuKey</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Event show</h3>
-            <div class="datasource">
-               <h3>getContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>data</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Event list</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
                   </tr>
                   <tr>
                      <td>orderBy</td>
-                     <td>data/start-date ASC, title ASC</td>
-                     <td>data/start-date ASC, title ASC</td>
+                     <td></td>
+                     <td></td>
                   </tr>
                   <tr>
                      <td>index</td>
@@ -385,8 +290,8 @@
                   </tr>
                   <tr>
                      <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
+                     <td>1</td>
+                     <td>1</td>
                   </tr>
                   <tr>
                      <td>includeData</td>
@@ -407,68 +312,10 @@
             </div>
          </div>
          <div class="portlet">
-            <h3>Portlet: Event mini list </h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>7</td>
-                     <td>7</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
-                  </tr>
-                  <tr>
-                     <td>orderBy</td>
-                     <td>data/start-date ASC, title ASC</td>
-                     <td>data/start-date ASC, title ASC</td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>4</td>
-                     <td>4</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Portlet: search</h3>
          </div>
          <div class="portlet">
-            <h3>Portlet: Portlet photo contest</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Photo contest list</h3>
+            <h3>Portlet: search-result</h3>
             <div class="datasource">
                <h3>getContentByCategory</h3>
                <table>
@@ -478,34 +325,42 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>cat</td>
-                     <td>9</td>
-                     <td>9</td>
+                     <td>categoryKeys</td>
+                     <td>1,41</td>
+                     <td>1,41</td>
                   </tr>
                   <tr>
                      <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
+                     <td>3</td>
+                     <td>3</td>
                   </tr>
                   <tr>
                      <td>query</td>
-                     <td></td>
-                     <td></td>
+                     <td>${isempty(param.q) ? "" : buildFreetextQuery("data/*", param.q, "AND")}
+                        ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype",
+                        replace(param.contenttype,',',' '), "OR" )) : "" }
+                        
+                     </td>
+                     <td>${isempty(param.q) ? "" : buildFreetextQuery("data/*", param.q, "AND")}
+                        ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype",
+                        replace(param.contenttype,',',' '), "OR" )) : "" }
+                        
+                     </td>
                   </tr>
                   <tr>
                      <td>orderBy</td>
-                     <td>publishFrom Desc</td>
-                     <td>publishFrom Desc</td>
+                     <td>@publishfrom DESC</td>
+                     <td>@publishfrom DESC</td>
                   </tr>
                   <tr>
                      <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>${select(param.index, '0')}</td>
+                     <td>${select(param.index, '0')}</td>
                   </tr>
                   <tr>
                      <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
+                     <td>100</td>
+                     <td>100</td>
                   </tr>
                   <tr>
                      <td>includeData</td>
@@ -514,28 +369,42 @@
                   </tr>
                   <tr>
                      <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>1</td>
+                     <td>1</td>
                   </tr>
                   <tr>
                      <td>parentLevel</td>
                      <td>0</td>
                      <td>0</td>
                   </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        contenttype
+                        20
+                        hits
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        contenttype
+                        20
+                        hits
+                        
+                        
+                        
+                     </td>
+                  </tr>
                </table>
             </div>
          </div>
          <div class="portlet">
-            <h3>Portlet: Banner beach</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Portlet contact us</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Share-bar</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Photo contest mini list </h3>
+            <h3>Portlet: search-and-create</h3>
             <div class="datasource">
                <h3>getContentByCategory</h3>
                <table>
@@ -544,257 +413,43 @@
                      <td>Source value</td>
                      <td>Target value</td>
                   </thead>
-                  <tr>
-                     <td>cat</td>
-                     <td>9</td>
-                     <td>9</td>
+                  <tr class="error">
+                     <td>categoryKeys</td>
+                     <td>1,41</td>
+                     <td>1,42</td>
                   </tr>
-                  <tr>
+                  <tr class="error">
                      <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
+                     <td>3</td>
+                     <td>5</td>
                   </tr>
                   <tr>
                      <td>query</td>
-                     <td></td>
-                     <td></td>
+                     <td>${isempty(param.q) ? "" : buildFreetextQuery("data/*", param.q, "AND")}
+                        ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype",
+                        replace(param.contenttype,',',' '), "OR" )) : "" }
+                        
+                     </td>
+                     <td>${isempty(param.q) ? "" : buildFreetextQuery("data/*", param.q, "AND")}
+                        ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype",
+                        replace(param.contenttype,',',' '), "OR" )) : "" }
+                        
+                     </td>
                   </tr>
                   <tr>
                      <td>orderBy</td>
-                     <td>publishFrom Desc</td>
-                     <td>publishFrom Desc</td>
+                     <td>@publishfrom DESC</td>
+                     <td>@publishfrom DESC</td>
                   </tr>
                   <tr>
                      <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>${select(param.index, '0')}</td>
+                     <td>${select(param.index, '0')}</td>
                   </tr>
                   <tr>
                      <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Comments</h3>
-            <div class="datasource">
-               <h3>getRelatedContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>relation</td>
-                     <td>-1</td>
-                     <td>-1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'comment'</td>
-                     <td>contenttype = 'comment'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td>@publishfrom ASC</td>
-                     <td>@publishfrom ASC</td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1000</td>
-                     <td>1000</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Portlet - Creative commons flash</h3>
-            <div class="datasource">
-               <h3>getContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>73</td>
-                     <td>73</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>data</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Video</h3>
-            <div class="datasource">
-               <h3>getContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>data</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Video list</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'video'</td>
-                     <td>contenttype = 'video'</td>
-                  </tr>
-                  <tr>
-                     <td>orderBy</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>${select(param.index, 0)}</td>
-                     <td>${select(param.index, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
+                     <td>100</td>
+                     <td>100</td>
                   </tr>
                   <tr>
                      <td>includeData</td>
@@ -810,332 +465,78 @@
                      <td>parentLevel</td>
                      <td>0</td>
                      <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        contenttype
+                        20
+                        hits
+                        
+                        
+                        data.no-of-opinions
+                        3
+                        hits
+                        
+                        
+                        data.no-of-product-components
+                        3
+                        hits
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        contenttype
+                        20
+                        hits
+                        
+                        
+                        data.no-of-opinions
+                        3
+                        hits
+                        
+                        
+                        data.no-of-product-components
+                        3
+                        hits
+                        
+                        
+                        
+                     </td>
                   </tr>
                </table>
             </div>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Standard</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Page template: article-section</h3>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Document</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Page template: article-show</h3>
          </div>
          <div class="pagetemplate">
             <h3>Page template: Formbuilder</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Destination</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Page template: Image</h3>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Destination list</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Page template: search-result</h3>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Event</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Page template: search-and-create</h3>
          </div>
-         <div class="pagetemplate">
-            <h3>Page template: Google sitemap</h3>
+      </div>
+      <div class="site">
+         <h3>Site: Infanteam</h3>
+         <div class="portlet">
+            <h3>Portlet: Leaderboard</h3>
             <div class="datasource">
-               <h3>getMenu</h3>
+               <h3>getContentByCategory</h3>
                <table>
                   <thead>
                      <td>Name</td>
@@ -1143,34 +544,9 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>menuKey</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>x,y,z</td>
-                     <td>x,y,z</td>
+                     <td>categoryKeys</td>
+                     <td>79</td>
+                     <td>79</td>
                   </tr>
                   <tr>
                      <td>levels</td>
@@ -1183,133 +559,19 @@
                      <td></td>
                   </tr>
                   <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
+                     <td>orderBy</td>
+                     <td>data.level DESC, data.stars DESC, data.score DESC</td>
+                     <td>data.level DESC, data.stars DESC, data.score DESC</td>
                   </tr>
                   <tr>
                      <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
                   </tr>
                   <tr>
                      <td>count</td>
-                     <td>10000</td>
-                     <td>10000</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Event list</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Robots txt</h3>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: RSS producer</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${select(param.articleSectionId, 1)}</td>
-                     <td>${select(param.articleSectionId, 1)}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>${select(param.articleLevels, 0)}</td>
-                     <td>${select(param.articleLevels, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'destination'</td>
-                     <td>contenttype = 'destination'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td>@timestamp DESC</td>
-                     <td>@timestamp DESC</td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
+                     <td>200</td>
+                     <td>200</td>
                   </tr>
                   <tr>
                      <td>includeData</td>
@@ -1328,36 +590,17 @@
                   </tr>
                </table>
             </div>
-            <div class="datasource">
-               <h3>getMenuItem</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${select(param.articleSectionId, 1)}</td>
-                     <td>${select(param.articleSectionId, 1)}</td>
-                  </tr>
-                  <tr>
-                     <td>withParents</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-                  <tr>
-                     <td>details</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-               </table>
-            </div>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Passport</h3>
+            <h3>Page template: Leaderboard</h3>
+         </div>
+      </div>
+      <div class="site">
+         <h3>Site: Innsikt API</h3>
+         <div class="pagetemplate">
+            <h3>Page template: settings</h3>
             <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
+               <h3>getContentByCategory</h3>Result element: current-language
                <table>
                   <thead>
                      <td>Name</td>
@@ -1365,107 +608,252 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
+                     <td>categoryKeys</td>
+                     <td>53</td>
+                     <td>53</td>
                   </tr>
                   <tr class="error">
-                     <td>includeTopLevel</td>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>4</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td>10</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
                      <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentBySection</h3>Result element: suggested-filters-on-registration
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKeys</td>
+                     <td>${select(portal.pageKey,-1)}</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype='Subscription'</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentBySection</h3>Result element: published-filters
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKeys</td>
+                     <td>${select(portal.pageKey,-1)}</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype='Filter'</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>Result element: api
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKey</td>
+                     <td>${select(portal.pageKey,26)}</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeTopLevel</td>
                      <td>false</td>
+                     <td></td>
                   </tr>
                   <tr>
                      <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>1</td>
+                     <td></td>
                   </tr>
                   <tr>
                      <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getUserstore</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>userstore</td>
+                     <td>2</td>
                      <td></td>
-                     <td></td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getTimeZones</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getLocales</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getCountries</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>countryCodes</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>includeRegions</td>
-                     <td>true</td>
-                     <td>true</td>
                   </tr>
                </table>
             </div>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Video</h3>
+            <h3>Page template: bootstrap</h3>
             <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
+               <h3>getContentByCategory</h3>Result element: current-language
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>53</td>
+                     <td>53</td>
+                  </tr>
+                  <tr class="error">
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>2</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td>10</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>
                <table>
                   <thead>
                      <td>Name</td>
@@ -1484,8 +872,8 @@
                   </tr>
                   <tr>
                      <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>1</td>
+                     <td>1</td>
                   </tr>
                   <tr>
                      <td>levels</td>
@@ -1494,8 +882,11 @@
                   </tr>
                </table>
             </div>
+         </div>
+         <div class="pagetemplate">
+            <h3>Page template: barcode-lookup</h3>
             <div class="datasource">
-               <h3>getPreferences</h3>
+               <h3>getContentByCategory</h3>Result element: current-language
                <table>
                   <thead>
                      <td>Name</td>
@@ -1503,22 +894,164 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
+                     <td>categoryKeys</td>
+                     <td>53</td>
+                     <td>53</td>
                   </tr>
                   <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td>10</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
                   </tr>
                </table>
             </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Video list</h3>
             <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
+               <h3>getContentByCategory</h3>Result element: product
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>24</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>${buildFreetextQuery("data/barcode", replace(param.barcode,',',' '), "OR" )}</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>50</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>2</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: filters
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>12</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>${concat(concat('key IN (',param.filters),')') }</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>2</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>Result element: api
                <table>
                   <thead>
                      <td>Name</td>
@@ -1527,28 +1060,31 @@
                   </thead>
                   <tr>
                      <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
+                     <td>26</td>
+                     <td></td>
                   </tr>
                   <tr>
                      <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
+                     <td>false</td>
+                     <td></td>
                   </tr>
                   <tr>
                      <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>1</td>
+                     <td></td>
                   </tr>
                   <tr>
                      <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>2</td>
+                     <td></td>
                   </tr>
                </table>
             </div>
+         </div>
+         <div class="pagetemplate">
+            <h3>Page template: all-xml</h3>
             <div class="datasource">
-               <h3>getPreferences</h3>
+               <h3>getContentByCategory</h3>Result element: current-language
                <table>
                   <thead>
                      <td>Name</td>
@@ -1556,25 +1092,408 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
+                     <td>categoryKeys</td>
+                     <td>53</td>
+                     <td>53</td>
                   </tr>
                   <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td>10</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: product
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>24</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>${buildFreetextQuery("data/barcode", replace(param.barcode,',',' '), "OR" )}</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>50</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>2</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: filters
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>12</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>${concat(concat('key IN (',param.filters),')') }</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>2</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>Result element: api
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKey</td>
+                     <td>26</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeTopLevel</td>
+                     <td>false</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>startLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>2</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="pagetemplate">
+            <h3>Page template: barcode-lookup (kopi)</h3>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: current-language
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>53</td>
+                     <td>53</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                     <td>data/iso-639-1 = 'no'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td>10</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: product
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>24</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>
+                        ${ isempty(param.barcode) ? buildFreetextQuery("data/barcode", "4200000000000", "AND"
+                        ) : buildFreetextQuery("data/barcode", param.barcode, "AND" ) }
+                        
+                     </td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>2</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: filters
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>12</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>${concat(concat('key IN (',param.filters),')') }</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>0</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>2</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>Result element: api
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKey</td>
+                     <td>26</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>includeTopLevel</td>
+                     <td>false</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>startLevel</td>
+                     <td>1</td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>2</td>
+                     <td></td>
                   </tr>
                </table>
             </div>
          </div>
       </div>
       <div class="site">
-         <h3>Site: Enonic Travels intranet</h3>
+         <h3>Site: Opdata</h3>
          <div class="portlet">
-            <h3>Portlet: Destination mini list</h3>
+            <h3>Portlet: simple</h3>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: search</h3>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: search-result</h3>
             <div class="datasource">
-               <h3>getContentBySection</h3>
+               <h3>invokeExtension</h3>
                <table>
                   <thead>
                      <td>Name</td>
@@ -1582,34 +1501,88 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>id</td>
-                     <td>59</td>
-                     <td>59</td>
+                     <td>name</td>
+                     <td>search.getSearchDetails</td>
+                     <td>search.getSearchDetails</td>
+                  </tr>
+                  <tr>
+                     <td>param1</td>
+                     <td>${isempty(param.q) ? "" : param.q}</td>
+                     <td>${isempty(param.q) ? "" : param.q}</td>
+                  </tr>
+                  <tr>
+                     <td>param2</td>
+                     <td>${isempty(param.contenttype) ? "" : param.contenttype}</td>
+                     <td>${isempty(param.contenttype) ? "" : param.contenttype}</td>
+                  </tr>
+                  <tr>
+                     <td>param3</td>
+                     <td>100</td>
+                     <td>100</td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1,41</td>
+                     <td>1,41</td>
                   </tr>
                   <tr>
                      <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
+                     <td>4</td>
+                     <td>4</td>
                   </tr>
                   <tr>
                      <td>query</td>
-                     <td>contenttype = 'destination'</td>
-                     <td>contenttype = 'destination'</td>
+                     <td>${isempty(param.q) ? "" :
+                        concat("(",
+                        	buildFreetextQuery("owner/qualifiedname", param.q, "AND"), 
+                        	" OR ", 
+                        	buildFreetextQuery("modifier/qualifiedname", param.q, "AND"), 
+                        	" OR ", 
+                        	buildFreetextQuery("data/*", param.q, "AND"),
+                        	")"
+                        ) }
+                        ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype",
+                        replace(param.contenttype,',',' '), "OR" )) : "" }
+                        
+                     </td>
+                     <td>${isempty(param.q) ? "" :
+                        concat("(",
+                        	buildFreetextQuery("owner/qualifiedname", param.q, "AND"), 
+                        	" OR ", 
+                        	buildFreetextQuery("modifier/qualifiedname", param.q, "AND"), 
+                        	" OR ", 
+                        	buildFreetextQuery("data/*", param.q, "AND"),
+                        	")"
+                        ) }
+                        ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype",
+                        replace(param.contenttype,',',' '), "OR" )) : "" }
+                        
+                     </td>
                   </tr>
                   <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
+                     <td>orderBy</td>
+                     <td>@publishfrom DESC</td>
+                     <td>@publishfrom DESC</td>
                   </tr>
                   <tr>
                      <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>${select(param.index, '0')}</td>
+                     <td>${select(param.index, '0')}</td>
                   </tr>
                   <tr>
                      <td>count</td>
-                     <td>3</td>
-                     <td>3</td>
+                     <td>100</td>
+                     <td>100</td>
                   </tr>
                   <tr>
                      <td>includeData</td>
@@ -1618,21 +1591,54 @@
                   </tr>
                   <tr>
                      <td>childrenLevel</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
                      <td>1</td>
                      <td>1</td>
                   </tr>
                   <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        contenttype
+                        20
+                        hits
+                        
+                        
+                        data.no-of-product-components
+                        10
+                        hits
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        contenttype
+                        20
+                        hits
+                        
+                        
+                        data.no-of-product-components
+                        10
+                        hits
+                        
+                        
+                        
+                     </td>
                   </tr>
                </table>
             </div>
          </div>
          <div class="portlet">
-            <h3>Portlet: Sitemap</h3>
+            <h3>Portlet: Searchstatistics</h3>
             <div class="datasource">
-               <h3>getMenu</h3>
+               <h3>getContentByCategory</h3>Result element: search-metadata
                <table>
                   <thead>
                      <td>Name</td>
@@ -1640,200 +1646,198 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>menuKey</td>
+                     <td>categoryKeys</td>
+                     <td>82</td>
+                     <td>82</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td>@publishfrom DESC</td>
+                     <td>@publishfrom DESC</td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, '0')}</td>
+                     <td>${select(param.index, '0')}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>10</td>
+                     <td>10</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        
+                        data.query
+                        data.hits
+                        hits
+                        15
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        
+                        data.query
+                        data.hits
+                        hits
+                        15
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: menu</h3>
+            <div class="datasource">
+               <h3>getMenuBranch</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>menuItemKey</td>
+                     <td>${portal.pageKey}</td>
+                     <td>${portal.pageKey}</td>
+                  </tr>
+                  <tr>
+                     <td>includeTopLevel</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>startLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: stats-popular-searches</h3>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: search-metadata
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>82</td>
+                     <td>82</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td>@publishfrom DESC</td>
+                     <td>@publishfrom DESC</td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, '0')}</td>
+                     <td>${select(param.index, '0')}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
                      <td>2</td>
                      <td>2</td>
                   </tr>
                   <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Banner frontpage</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Event show</h3>
-            <div class="datasource">
-               <h3>getContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>data</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
                      <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        data.query
+                        data.hits
+                        hits
+                        15
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        data.query
+                        data.hits
+                        hits
+                        15
+                        
+                        
+                        
+                     </td>
                   </tr>
                </table>
             </div>
          </div>
          <div class="portlet">
-            <h3>Portlet: Event list</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
-                  </tr>
-                  <tr>
-                     <td>orderBy</td>
-                     <td>data/start-date ASC, title ASC</td>
-                     <td>data/start-date ASC, title ASC</td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>${select(param.index, 0)}</td>
-                     <td>${select(param.index, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Event mini list </h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>40</td>
-                     <td>40</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
-                     <td>data/end-date &gt;= today() AND contenttype = 'event'</td>
-                  </tr>
-                  <tr>
-                     <td>orderBy</td>
-                     <td>data/start-date ASC, title ASC</td>
-                     <td>data/start-date ASC, title ASC</td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>3</td>
-                     <td>3</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Portlet photo contest</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Photo contest list</h3>
+            <h3>Portlet: stats-query-histogram</h3>
             <div class="datasource">
                <h3>getContentByCategory</h3>
                <table>
@@ -1843,9 +1847,88 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>cat</td>
-                     <td>9</td>
-                     <td>9</td>
+                     <td>categoryKeys</td>
+                     <td>82</td>
+                     <td>82</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>${buildFreetextQuery("data/*", param.q, "AND")}</td>
+                     <td>${buildFreetextQuery("data/*", param.q, "AND")}</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td>@publishfrom DESC</td>
+                     <td>@publishfrom DESC</td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, '0')}</td>
+                     <td>${select(param.index, '0')}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>false</td>
+                     <td>false</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: stats-recent-searches</h3>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>Result element: search-metadata
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>82</td>
+                     <td>82</td>
                   </tr>
                   <tr>
                      <td>levels</td>
@@ -1859,730 +1942,76 @@
                   </tr>
                   <tr>
                      <td>orderBy</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Document show</h3>
-            <div class="datasource">
-               <h3>getContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Portlet example</h3>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Formbuilder</h3>
-            <div class="datasource">
-               <h3>getMenuItem</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>withParents</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-                  <tr>
-                     <td>details</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Destination show</h3>
-            <div class="datasource">
-               <h3>getContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr class="error">
-                     <td>count</td>
-                     <td>1</td>
-                     <td>123</td>
-                  </tr>
-                  <tr>
-                     <td>data</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Destination list</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'destination'</td>
-                     <td>contenttype = 'destination'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>${select(param.index, 0)}</td>
-                     <td>${select(param.index, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Downloads</h3>
-            <div class="datasource">
-               <h3>getCategories</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>cat</td>
-                     <td>17</td>
-                     <td>17</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>contentCount</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-                  <tr>
-                     <td>includeCurrent</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getContentByCategory</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>cat</td>
-                     <td>17</td>
-                     <td>17</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderBy</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1000</td>
-                     <td>1000</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Article list </h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'article'</td>
-                     <td>contenttype = 'article'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>${select(param.index, 0)}</td>
-                     <td>${select(param.index, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Article mini list</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${select(param.articleSectionId, select(param.id, -1))}</td>
-                     <td>${select(param.articleSectionId, select(param.id, -1))}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'article'</td>
-                     <td>contenttype = 'article'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>3</td>
-                     <td>3</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Article show</h3>
-            <div class="datasource">
-               <h3>getContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>data</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Twitranet</h3>
-            <div class="datasource">
-               <h3>getContentByCategory</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>cat</td>
-                     <td>${select(param.twitranetCategoryKey, 26)}</td>
-                     <td>${select(param.twitranetCategoryKey, 26)}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderBy</td>
-                     <td>@key DESC</td>
-                     <td>@key DESC</td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>${select(param.index, 0)}</td>
-                     <td>${select(param.index, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>${select(param.count, 5)}</td>
-                     <td>${select(param.count, 5)}</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="portlet">
-            <h3>Portlet: Comments</h3>
-            <div class="datasource">
-               <h3>getRelatedContent</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>key</td>
-                     <td>${select(param.key, -1)}</td>
-                     <td>${select(param.key, -1)}</td>
-                  </tr>
-                  <tr>
-                     <td>relation</td>
-                     <td>-1</td>
-                     <td>-1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'comment'</td>
-                     <td>contenttype = 'comment'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td>@publishfrom ASC</td>
-                     <td>@publishfrom ASC</td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>1000</td>
-                     <td>1000</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Robots txt</h3>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Google sitemap</h3>
-            <div class="datasource">
-               <h3>getMenu</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuKey</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>x,y,z</td>
-                     <td>x,y,z</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>1</td>
-                     <td>1</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>count</td>
-                     <td>10000</td>
-                     <td>10000</td>
-                  </tr>
-                  <tr>
-                     <td>includeData</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>childrenLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>parentLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: RSS producer</h3>
-            <div class="datasource">
-               <h3>getContentBySection</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>id</td>
-                     <td>${select(param.articleSectionId, 30)}</td>
-                     <td>${select(param.articleSectionId, 30)}</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>${select(param.articleLevels, 0)}</td>
-                     <td>${select(param.articleLevels, 0)}</td>
-                  </tr>
-                  <tr>
-                     <td>query</td>
-                     <td>contenttype = 'article'</td>
-                     <td>contenttype = 'article'</td>
-                  </tr>
-                  <tr>
-                     <td>orderby</td>
                      <td>@timestamp DESC</td>
                      <td>@timestamp DESC</td>
                   </tr>
                   <tr>
                      <td>index</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>${select(param.index, '0')}</td>
+                     <td>${select(param.index, '0')}</td>
                   </tr>
                   <tr>
                      <td>count</td>
-                     <td>10</td>
-                     <td>10</td>
+                     <td>15</td>
+                     <td>15</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>2</td>
+                     <td>2</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: stats-data-contenttype-owner-modifier</h3>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = '${select(param.contenttype, '')}'</td>
+                     <td>contenttype = '${select(param.contenttype, '')}'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
                   </tr>
                   <tr>
                      <td>includeData</td>
@@ -2599,10 +2028,47 @@
                      <td>0</td>
                      <td>0</td>
                   </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        modifier/qualifiedname
+                        hits DESC
+                        
+                        
+                        owner/qualifiedname
+                        hits DESC
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        modifier/qualifiedname
+                        hits DESC
+                        
+                        
+                        owner/qualifiedname
+                        hits DESC
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
                </table>
             </div>
             <div class="datasource">
-               <h3>getMenuItem</h3>
+               <h3>getContentByCategory</h3>
                <table>
                   <thead>
                      <td>Name</td>
@@ -2610,607 +2076,1317 @@
                      <td>Target value</td>
                   </thead>
                   <tr>
-                     <td>menuItemKey</td>
-                     <td>${select(param.articleSectionId, 30)}</td>
-                     <td>${select(param.articleSectionId, 30)}</td>
-                  </tr>
-                  <tr>
-                     <td>withParents</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-                  <tr>
-                     <td>details</td>
-                     <td>false</td>
-                     <td>false</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Standard</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
                   </tr>
                   <tr>
                      <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
+                     <td>6</td>
+                     <td>6</td>
                   </tr>
                   <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Document</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr class="error">
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0123</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Formbuilder</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Destination</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Destination list</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Event</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Event list</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-         </div>
-         <div class="pagetemplate">
-            <h3>Page template: Passport</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getUserstore</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>userstore</td>
-                     <td></td>
-                     <td></td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getTimeZones</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getLocales</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getCountries</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>countryCodes</td>
+                     <td>query</td>
                      <td></td>
                      <td></td>
                   </tr>
                   <tr>
-                     <td>includeRegions</td>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
                      <td>true</td>
                      <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        contenttype
+                        hits DESC
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        contenttype
+                        hits DESC
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: social-nav</h3>
+            <div class="datasource">
+               <h3>getSessionContext</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: stats-count-contenttypes-over-time</h3>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>24</td>
+                     <td>24</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: stats-count-contenttypes-over-time (kopi)</h3>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>24</td>
+                     <td>24</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>9</td>
+                     <td>9</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>57</td>
+                     <td>57</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>18</td>
+                     <td>18</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>7</td>
+                     <td>7</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>19</td>
+                     <td>19</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>12</td>
+                     <td>12</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>3</td>
+                     <td>3</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'day')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="portlet">
+            <h3>Portlet: stats-data-contenttype-additions-over-time</h3>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = '${select(param.contenttype, '')}'</td>
+                     <td>contenttype = '${select(param.contenttype, '')}'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = 'Opinion'</td>
+                     <td>contenttype = 'Opinion'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = 'Filter'</td>
+                     <td>contenttype = 'Filter'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = 'Product'</td>
+                     <td>contenttype = 'Product'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = 'ProductComponent'</td>
+                     <td>contenttype = 'ProductComponent'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = 'Additive'</td>
+                     <td>contenttype = 'Additive'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div class="datasource">
+               <h3>getContentByCategory</h3>
+               <table>
+                  <thead>
+                     <td>Name</td>
+                     <td>Source value</td>
+                     <td>Target value</td>
+                  </thead>
+                  <tr>
+                     <td>categoryKeys</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>levels</td>
+                     <td>6</td>
+                     <td>6</td>
+                  </tr>
+                  <tr>
+                     <td>query</td>
+                     <td>contenttype = 'Company'</td>
+                     <td>contenttype = 'Company'</td>
+                  </tr>
+                  <tr>
+                     <td>orderBy</td>
+                     <td></td>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <td>index</td>
+                     <td>${select(param.index, 0)}</td>
+                     <td>${select(param.index, 0)}</td>
+                  </tr>
+                  <tr>
+                     <td>count</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>includeData</td>
+                     <td>true</td>
+                     <td>true</td>
+                  </tr>
+                  <tr>
+                     <td>childrenLevel</td>
+                     <td>1</td>
+                     <td>1</td>
+                  </tr>
+                  <tr>
+                     <td>parentLevel</td>
+                     <td>0</td>
+                     <td>0</td>
+                  </tr>
+                  <tr>
+                     <td>facets</td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
+                     <td>
+                        
+                        
+                        timestamp
+                        ${select(param.interval,'month')}
+                        
+                        
+                        
+                     </td>
                   </tr>
                </table>
             </div>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Article list</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Page template: page</h3>
          </div>
          <div class="pagetemplate">
-            <h3>Page template: Article</h3>
-            <div class="datasource">
-               <h3>getMenuBranch</h3>Result element: menu
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>menuItemKey</td>
-                     <td>${portal.pageKey}</td>
-                     <td>${portal.pageKey}</td>
-                  </tr>
-                  <tr>
-                     <td>includeTopLevel</td>
-                     <td>true</td>
-                     <td>true</td>
-                  </tr>
-                  <tr>
-                     <td>startLevel</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-                  <tr>
-                     <td>levels</td>
-                     <td>0</td>
-                     <td>0</td>
-                  </tr>
-               </table>
-            </div>
-            <div class="datasource">
-               <h3>getPreferences</h3>
-               <table>
-                  <thead>
-                     <td>Name</td>
-                     <td>Source value</td>
-                     <td>Target value</td>
-                  </thead>
-                  <tr>
-                     <td>scope</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-                  <tr>
-                     <td>wildCardkey</td>
-                     <td>*</td>
-                     <td>*</td>
-                  </tr>
-               </table>
-            </div>
+            <h3>Page template: search-result</h3>
          </div>
       </div>
    </body>

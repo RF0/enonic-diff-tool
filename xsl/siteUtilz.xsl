@@ -107,30 +107,30 @@
         <xsl:for-each select="$sourceDatasources">            
             <div class="datasource">                
                 <xsl:variable name="currentPosition" select="position()" />                
-                <xsl:variable name="sourceMethodName" select="./methodname" />
+                <xsl:variable name="sourceMethodName" select="@name" />
                 <xsl:variable name="sourceResultElementName" select="@result-element" />
                 <xsl:variable name="sourceParams" select="
                     if(@result-element) then
-                        .[@result-element=$sourceResultElementName and ./methodname=$sourceMethodName]/parameters/parameter
+                        .[@result-element=$sourceResultElementName and @name=$sourceMethodName]/parameter
                     else
-                        .[not(@result-element) and ./methodname=$sourceMethodName]/parameters/parameter                    
+                        .[not(@result-element) and @name=$sourceMethodName]/parameter
                     "/>
                 <!-- TBD: this is somewhat buggy ... else(no result element) loops in order -->
                 <xsl:variable name="targetParams" select="
                     if(@result-element) then
-                        $targetDatasources[@result-element=$sourceResultElementName and ./methodname=$sourceMethodName][$currentPosition]/parameters/parameter
+                        $targetDatasources[@result-element=$sourceResultElementName and @name=$sourceMethodName][$currentPosition]/parameter
                     else
-                        $targetDatasources[$currentPosition]/parameters/parameter
+                        $targetDatasources[$currentPosition]/parameter
                     " />
                 <xsl:variable name="sourceParamCount" select="count($sourceParams)" />
                 <xsl:variable name="targetParamCount" select="count($targetParams)" />                
-                <h3><xsl:value-of select="./methodname"/></h3>
+                <h3><xsl:value-of select="@name"/></h3>
                 <xsl:value-of select="if(@result-element) then concat('Result element: ', @result-element) else ''"/>
                 <!-- 
                     Number of parameters in [source/target]: <xsl:value-of select="concat('[', $sourceParamCount, '/', $targetParamCount, ']')" /><br/>
                 -->               
                 <xsl:choose>
-                    <xsl:when test="$targetDatasources[./methodname=$sourceMethodName]">
+                    <xsl:when test="$targetDatasources[@name=$sourceMethodName]">
                         <xsl:call-template name="paramProcessor">
                             <xsl:with-param name="sourceParams" select="$sourceParams" />
                             <xsl:with-param name="targetParams" select="$targetParams" />

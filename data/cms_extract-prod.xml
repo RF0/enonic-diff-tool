@@ -1,1251 +1,1579 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <extract>
-  <site name="Enonic Travels">
+  <site name="II">
     <portlets>
-      <portlet name="Portlet welcome">
-        <datasources />
-      </portlet>
-      <portlet name="Document show">
+      <portlet name="articlesection-content">
         <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentBySection">
+            <parameter name="menuItemKeys">${select(portal.pageKey,-1)}</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">contenttype='ArticleSection'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">2</parameter>
+            <parameter name="parentLevel">0</parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Portlet example">
-        <datasources />
+      <portlet name="article-content">
+        <datasources>
+          <datasource name="getMenuBranch">
+            <parameter name="menuItemKey">${portal.pageKey}</parameter>
+            <parameter name="includeTopLevel">true</parameter>
+            <parameter name="startLevel">0</parameter>
+            <parameter name="levels">1</parameter>
+          </datasource>
+          <datasource name="getContent">
+            <parameter name="contentKeys">${select(param.key,-1)}</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">1</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+          </datasource>
+        </datasources>
+      </portlet>
+      <portlet name="top-menu">
+        <datasources>
+          <datasource name="getMenuBranch">
+            <parameter name="menuItemKey">${portal.pageKey}</parameter>
+            <parameter name="includeTopLevel">true</parameter>
+            <parameter name="startLevel">0</parameter>
+            <parameter name="levels">1</parameter>
+          </datasource>
+        </datasources>
       </portlet>
       <portlet name="Formbuilder">
-        <datasources querystringcontext="true">
-          <datasource>
-            <methodname>getMenuItem</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="withParents" type="boolean">false</parameter>
-              <parameter name="details" type="boolean">true</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Destination show">
         <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="data" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource name="getMenuBranch" result-element="mainmenu">
+            <parameter name="menuItemKey">${portal.pageKey}</parameter>
+            <parameter name="includeTopLevel">true</parameter>
+            <parameter name="startLevel">0</parameter>
+            <parameter name="levels">1</parameter>
+          </datasource>
+          <datasource name="getSessionContext" result-element="context"/>
+          <datasource name="getMenuItem">
+            <parameter name="menuItemKey">${select(param.id, '-1')}</parameter>
+            <parameter name="withParents">false</parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Destination list">
+      <portlet name="social-nav">
         <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">contenttype = 'destination'</parameter>
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">${select(param.index, 0)}</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
+          <datasource name="getSessionContext"/>
         </datasources>
       </portlet>
-      <portlet name="Destination mini list">
+      <portlet name="Image">
         <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${select(param.articleSectionId, select(param.id, -1))}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">contenttype = 'destination'</parameter>
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">3</parameter>
-              <parameter name="includeData" type="boolean">false</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContent">
+            <parameter name="contentKeys">${select(param.key,-1)}</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">1</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Banner frontpage">
-        <datasources />
+      <portlet name="search">
+        <datasources/>
       </portlet>
-      <portlet name="Sitemap">
+      <portlet name="search-result">
         <datasources>
-          <datasource>
-            <methodname>getMenu</methodname>
-            <parameters>
-              <parameter name="menuKey" type="int">0</parameter>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory">
+            <parameter name="categoryKeys">1,41</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query">${isempty(param.q) ? "" : buildFreetextQuery("data/*", param.q, "AND")}
+              ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype", replace(param.contenttype,',',' '), "OR" )) : "" }
+            </parameter>
+            <parameter name="orderBy">@publishfrom DESC</parameter>
+            <parameter name="index">${select(param.index, '0')}</parameter>
+            <parameter name="count">100</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <terms name="contenttype">
+                  <indexes>contenttype</indexes>
+                  <count>20</count>
+                  <orderby>hits</orderby>
+                </terms>
+              </facets>
+            </parameter>
           </datasource>
+          <!--<datasource condition="${not(isempty(param.q))}" name="getContentByQuery">
+          <parameter name="query">${isempty(param.q) ? "" : buildFreetextQuery("data/*", param.q, "AND")} ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype", replace(param.contenttype,',',' '), "OR" )) : "" }
+        </parameter>
+          <parameter name="orderBy"/>
+          <parameter name="index">${select(param.index, 0)}</parameter>
+          <parameter name="count">1000</parameter>
+          <parameter name="includeData">true</parameter>
+          <parameter name="childrenLevel">1</parameter>
+          <parameter name="parentLevel">2</parameter>
+          <parameter name="facets">
+          <facets>
+          <terms name="contenttype">
+          <indexes>contenttype</indexes>
+          <count>20</count>
+          <orderby>hits</orderby>
+        </terms>
+        </facets>
+        </parameter>
+        </datasource>-->
         </datasources>
       </portlet>
-      <portlet name="Event show">
+      <portlet name="search-and-create">
         <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="data" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Event list">
-        <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">data/end-date &gt;= today() AND contenttype = 'event'</parameter>
-              <parameter name="orderBy" type="string">data/start-date ASC, title ASC</parameter>
-              <parameter name="index" type="int">${select(param.index, 0)}</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Event mini list ">
-        <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">7</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">data/end-date &gt;= today() AND contenttype = 'event'</parameter>
-              <parameter name="orderBy" type="string">data/start-date ASC, title ASC</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">4</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Portlet photo contest">
-        <datasources />
-      </portlet>
-      <portlet name="Photo contest list">
-        <datasources>
-          <datasource>
-            <methodname>getContentByCategory</methodname>
-            <parameters>
-              <parameter name="cat" type="int[]">9</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderBy" type="string">publishFrom Desc</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Banner beach">
-        <datasources />
-      </portlet>
-      <portlet name="Portlet contact us">
-        <datasources />
-      </portlet>
-      <portlet name="Share-bar">
-        <datasources />
-      </portlet>
-      <portlet name="Photo contest mini list ">
-        <datasources>
-          <datasource>
-            <methodname>getContentByCategory</methodname>
-            <parameters>
-              <parameter name="cat" type="int[]">9</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderBy" type="string">publishFrom Desc</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Comments">
-        <datasources sessioncontext="true">
-          <datasource>
-            <methodname>getRelatedContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="relation" type="int">-1</parameter>
-              <parameter name="query" type="string">contenttype = 'comment'</parameter>
-              <parameter name="orderby" type="string">@publishfrom ASC</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1000</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Portlet - Creative commons flash">
-        <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">73</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="data" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Video">
-        <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="data" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Video list">
-        <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">contenttype = 'video'</parameter>
-              <parameter name="orderBy" type="string" />
-              <parameter name="index" type="int">${select(param.index, 0)}</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isnotblank(param.q)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1,41</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query">${isempty(param.q) ? "" : buildFreetextQuery("data/*", param.q, "AND")}
+              ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype", replace(param.contenttype,',',' '), "OR" )) : "" }
+            </parameter>
+            <parameter name="orderBy">@publishfrom DESC</parameter>
+            <parameter name="index">${select(param.index, '0')}</parameter>
+            <parameter name="count">100</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <terms name="contenttype">
+                  <indexes>contenttype</indexes>
+                  <count>20</count>
+                  <orderby>hits</orderby>
+                </terms>
+                <terms name="number-of-opinions">
+                  <indexes>data.no-of-opinions</indexes>
+                  <count>3</count>
+                  <orderby>hits</orderby>
+                </terms>
+                <terms name="number-of-product-components">
+                  <indexes>data.no-of-product-components</indexes>
+                  <count>3</count>
+                  <orderby>hits</orderby>
+                </terms>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
     </portlets>
     <page-templates>
-      <page-template name="Standard">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
+      <page-template name="article-section">
+        <datasources/>
       </page-template>
-      <page-template name="Document">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
+      <page-template name="article-show">
+        <datasources/>
       </page-template>
       <page-template name="Formbuilder">
+        <datasources/>
+      </page-template>
+      <page-template name="Image">
+        <datasources/>
+      </page-template>
+      <page-template name="search-result">
+        <datasources/>
+      </page-template>
+      <page-template name="search-and-create">
+        <datasources/>
+      </page-template>
+    </page-templates>
+  </site>
+  <site name="Infanteam">
+    <portlets>
+      <portlet name="Leaderboard">
         <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory">
+            <parameter name="categoryKeys">79</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy">data.level DESC, data.stars DESC, data.score DESC</parameter>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">200</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
           </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
+        </datasources>
+      </portlet>
+    </portlets>
+    <page-templates>
+      <page-template name="Leaderboard">
+        <datasources/>
+      </page-template>
+    </page-templates>
+  </site>
+  <site name="Innsikt API">
+    <portlets/>
+    <page-templates>
+      <page-template name="settings">
+        <datasources>
+          <datasource name="getContentByCategory" result-element="current-language">
+            <parameter name="categoryKeys">53</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">data/iso-639-1 = 'no'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+          </datasource>
+          <datasource name="getContentBySection" result-element="suggested-filters-on-registration">
+            <parameter name="menuItemKeys">${select(portal.pageKey,-1)}</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">contenttype='Subscription'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">0</parameter>
+            <parameter name="parentLevel">0</parameter>
+          </datasource>
+          <datasource name="getContentBySection" result-element="published-filters">
+            <parameter name="menuItemKeys">${select(portal.pageKey,-1)}</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">contenttype='Filter'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+          </datasource>
+          <datasource name="getMenuBranch" result-element="api">
+            <parameter name="menuItemKey">${select(portal.pageKey,26)}</parameter>
+            <parameter name="includeTopLevel">false</parameter>
+            <parameter name="startLevel">1</parameter>
+            <parameter name="levels">2</parameter>
           </datasource>
         </datasources>
       </page-template>
-      <page-template name="Destination">
+      <page-template name="bootstrap">
         <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="current-language">
+            <parameter name="categoryKeys">53</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">data/iso-639-1 = 'no'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
           </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
+          <datasource name="getMenuBranch">
+            <parameter name="menuItemKey">${portal.pageKey}</parameter>
+            <parameter name="includeTopLevel">true</parameter>
+            <parameter name="startLevel">1</parameter>
+            <parameter name="levels">0</parameter>
           </datasource>
         </datasources>
       </page-template>
-      <page-template name="Destination list">
+      <page-template name="barcode-lookup">
         <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="current-language">
+            <parameter name="categoryKeys">53</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">data/iso-639-1 = 'no'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
           </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
+          <!--<datasource name="getContentByCategory" result-element="product">
+          <parameter name="categoryKeys">24</parameter>
+          <parameter name="levels">0</parameter>
+          <parameter name="query">${ isempty(param.barcode) ? buildFreetextQuery("data/barcode", "4200000000000", "AND" ) : buildFreetextQuery("data/barcode", param.barcode, "AND" ) }</parameter>
+          <parameter name="orderBy"/>
+          <parameter name="index">0</parameter>
+          <parameter name="count">1</parameter>
+          <parameter name="includeData">true</parameter>
+          <parameter name="childrenLevel">1</parameter>
+          <parameter name="parentLevel">2</parameter>
+        </datasource>-->
+          <datasource name="getContentByCategory" result-element="product">
+            <parameter name="categoryKeys">24</parameter>
+            <parameter name="levels">0</parameter>
+            <parameter name="query">${buildFreetextQuery("data/barcode", replace(param.barcode,',',' '), "OR" )}</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">50</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">2</parameter>
+          </datasource>
+          <datasource condition="${isnotempty(param.filters)}" name="getContentByCategory" result-element="filters">
+            <parameter name="categoryKeys">12</parameter>
+            <parameter name="levels">0</parameter>
+            <parameter name="query">${concat(concat('key IN (',param.filters),')') }</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">2</parameter>
+            <parameter name="parentLevel">1</parameter>
+          </datasource>
+          <datasource name="getMenuBranch" result-element="api">
+            <parameter name="menuItemKey">26</parameter>
+            <parameter name="includeTopLevel">false</parameter>
+            <parameter name="startLevel">1</parameter>
+            <parameter name="levels">2</parameter>
           </datasource>
         </datasources>
       </page-template>
-      <page-template name="Event">
+      <page-template name="all-xml">
         <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="current-language">
+            <parameter name="categoryKeys">53</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">data/iso-639-1 = 'no'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
           </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
+          <!--<datasource name="getContentByCategory" result-element="product">
+          <parameter name="categoryKeys">24</parameter>
+          <parameter name="levels">0</parameter>
+          <parameter name="query">${ isempty(param.barcode) ? buildFreetextQuery("data/barcode", "4200000000000", "AND" ) : buildFreetextQuery("data/barcode", param.barcode, "AND" ) }</parameter>
+          <parameter name="orderBy"/>
+          <parameter name="index">0</parameter>
+          <parameter name="count">1</parameter>
+          <parameter name="includeData">true</parameter>
+          <parameter name="childrenLevel">1</parameter>
+          <parameter name="parentLevel">2</parameter>
+        </datasource>-->
+          <datasource name="getContentByCategory" result-element="product">
+            <parameter name="categoryKeys">24</parameter>
+            <parameter name="levels">0</parameter>
+            <parameter name="query">${buildFreetextQuery("data/barcode", replace(param.barcode,',',' '), "OR" )}</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">50</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">2</parameter>
+          </datasource>
+          <datasource condition="${isnotempty(param.filters)}" name="getContentByCategory" result-element="filters">
+            <parameter name="categoryKeys">12</parameter>
+            <parameter name="levels">0</parameter>
+            <parameter name="query">${concat(concat('key IN (',param.filters),')') }</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">2</parameter>
+            <parameter name="parentLevel">1</parameter>
+          </datasource>
+          <datasource name="getMenuBranch" result-element="api">
+            <parameter name="menuItemKey">26</parameter>
+            <parameter name="includeTopLevel">false</parameter>
+            <parameter name="startLevel">1</parameter>
+            <parameter name="levels">2</parameter>
           </datasource>
         </datasources>
       </page-template>
-      <page-template name="Google sitemap">
+      <page-template name="barcode-lookup (kopi)">
         <datasources>
-          <datasource>
-            <methodname>getMenu</methodname>
-            <parameters>
-              <parameter name="menuKey" type="int">0</parameter>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="current-language">
+            <parameter name="categoryKeys">53</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">data/iso-639-1 = 'no'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
           </datasource>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">x,y,z</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">10000</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="product">
+            <parameter name="categoryKeys">24</parameter>
+            <parameter name="levels">0</parameter>
+            <parameter name="query">
+              ${ isempty(param.barcode) ? buildFreetextQuery("data/barcode", "4200000000000", "AND" ) : buildFreetextQuery("data/barcode", param.barcode, "AND" ) }
+            </parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">1</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">2</parameter>
           </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Event list">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isnotempty(param.filters)}" name="getContentByCategory" result-element="filters">
+            <parameter name="categoryKeys">12</parameter>
+            <parameter name="levels">0</parameter>
+            <parameter name="query">${concat(concat('key IN (',param.filters),')') }</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">0</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">2</parameter>
+            <parameter name="parentLevel">1</parameter>
           </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Robots txt">
-        <datasources />
-      </page-template>
-      <page-template name="RSS producer">
-        <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${select(param.articleSectionId, 1)}</parameter>
-              <parameter name="levels" type="int">${select(param.articleLevels, 0)}</parameter>
-              <parameter name="query" type="string">contenttype = 'destination'</parameter>
-              <parameter name="orderby" type="string">@timestamp DESC</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getMenuItem</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${select(param.articleSectionId, 1)}</parameter>
-              <parameter name="withParents" type="boolean">false</parameter>
-              <parameter name="details" type="boolean">false</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Passport">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getUserstore</methodname>
-            <parameters>
-              <parameter name="userstore" type="string" />
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getTimeZones</methodname>
-            <parameters />
-          </datasource>
-          <datasource>
-            <methodname>getLocales</methodname>
-            <parameters />
-          </datasource>
-          <datasource>
-            <methodname>getCountries</methodname>
-            <parameters>
-              <parameter name="countryCodes" type="string[]" />
-              <parameter name="includeRegions" type="boolean">true</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Video">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Video list">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
+          <datasource name="getMenuBranch" result-element="api">
+            <parameter name="menuItemKey">26</parameter>
+            <parameter name="includeTopLevel">false</parameter>
+            <parameter name="startLevel">1</parameter>
+            <parameter name="levels">2</parameter>
           </datasource>
         </datasources>
       </page-template>
     </page-templates>
   </site>
-  <site name="Enonic Travels intranet">
+  <site name="Opdata">
     <portlets>
-      <portlet name="Destination mini list">
+      <portlet name="simple">
+        <datasources/>
+      </portlet>
+      <portlet name="search">
+        <datasources/>
+      </portlet>
+      <portlet name="search-result">
         <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">59</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">contenttype = 'destination'</parameter>
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">3</parameter>
-              <parameter name="includeData" type="boolean">false</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${not(isempty(param.q))}" name="invokeExtension">
+            <parameter name="name">search.getSearchDetails</parameter>
+            <parameter name="param1">${isempty(param.q) ? "" : param.q}</parameter>
+            <parameter name="param2">${isempty(param.contenttype) ? "" : param.contenttype}</parameter>
+            <parameter name="param3">100</parameter>
+          </datasource>
+          <datasource condition="${not(isempty(param.q))}" name="getContentByCategory">
+            <parameter name="categoryKeys">1,41</parameter>
+            <parameter name="levels">4</parameter>
+            <parameter name="query">${isempty(param.q) ? "" :
+concat("(",
+	buildFreetextQuery("owner/qualifiedname", param.q, "AND"), 
+	" OR ", 
+	buildFreetextQuery("modifier/qualifiedname", param.q, "AND"), 
+	" OR ", 
+	buildFreetextQuery("data/*", param.q, "AND"),
+	")"
+) }
+              ${ stringlength(param.contenttype) != 0 ? concat("AND ", buildFreetextQuery("contenttype", replace(param.contenttype,',',' '), "OR" )) : "" }
+            </parameter>
+            <parameter name="orderBy">@publishfrom DESC</parameter>
+            <parameter name="index">${select(param.index, '0')}</parameter>
+            <parameter name="count">100</parameter>
+            <parameter name="includeData">false</parameter>
+            <parameter name="childrenLevel">3</parameter>
+            <parameter name="parentLevel">1</parameter>
+            <parameter name="facets">
+              <facets>
+                <terms name="contenttype">
+                  <indexes>contenttype</indexes>
+                  <count>20</count>
+                  <orderby>hits</orderby>
+                </terms>
+                <terms name="number-of-product-components">
+                  <indexes>data.no-of-product-components</indexes>
+                  <count>10</count>
+                  <orderby>hits</orderby>
+                </terms>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Sitemap">
+      <portlet name="Searchstatistics">
         <datasources>
-          <datasource>
-            <methodname>getMenu</methodname>
-            <parameters>
-              <parameter name="menuKey" type="int">2</parameter>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="search-metadata">
+            <parameter name="categoryKeys">82</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy">@publishfrom DESC</parameter>
+            <parameter name="index">${select(param.index, '0')}</parameter>
+            <parameter name="count">10</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">1</parameter>
+            <parameter name="facets">
+              <facets>
+                <!--<terms name="popular-search-queries">
+                <indexes>data.query</indexes>
+                <count>50</count>
+                <orderby>hits</orderby>
+              </terms>-->
+                <terms-stats name="top-searches-with-hits">
+                  <index>data.query</index>
+                  <value-index>data.hits</value-index>
+                  <orderby>hits</orderby>
+                  <count>15</count>
+                </terms-stats>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Banner frontpage">
-        <datasources />
-      </portlet>
-      <portlet name="Event show">
+      <portlet name="menu">
         <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="data" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource name="getMenuBranch">
+            <parameter name="menuItemKey">${portal.pageKey}</parameter>
+            <parameter name="includeTopLevel">true</parameter>
+            <parameter name="startLevel">0</parameter>
+            <parameter name="levels">3</parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Event list">
+      <portlet name="stats-popular-searches">
         <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">data/end-date &gt;= today() AND contenttype = 'event'</parameter>
-              <parameter name="orderBy" type="string">data/start-date ASC, title ASC</parameter>
-              <parameter name="index" type="int">${select(param.index, 0)}</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="search-metadata">
+            <parameter name="categoryKeys">82</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy">@publishfrom DESC</parameter>
+            <parameter name="index">${select(param.index, '0')}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">2</parameter>
+            <parameter name="parentLevel">1</parameter>
+            <parameter name="facets">
+              <facets>
+                <terms-stats name="top-searches-with-hits">
+                  <index>data.query</index>
+                  <value-index>data.hits</value-index>
+                  <orderby>hits</orderby>
+                  <count>15</count>
+                </terms-stats>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Event mini list ">
+      <portlet name="stats-query-histogram">
         <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">40</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">data/end-date &gt;= today() AND contenttype = 'event'</parameter>
-              <parameter name="orderBy" type="string">data/start-date ASC, title ASC</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">3</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${not(isempty(param.q))}" name="getContentByCategory">
+            <parameter name="categoryKeys">82</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query">${buildFreetextQuery("data/*", param.q, "AND")}</parameter>
+            <parameter name="orderBy">@publishfrom DESC</parameter>
+            <parameter name="index">${select(param.index, '0')}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">false</parameter>
+            <parameter name="childrenLevel">0</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="query-histogram-facet">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Portlet photo contest">
-        <datasources />
-      </portlet>
-      <portlet name="Photo contest list">
+      <portlet name="stats-recent-searches">
         <datasources>
-          <datasource>
-            <methodname>getContentByCategory</methodname>
-            <parameters>
-              <parameter name="cat" type="int[]">9</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderBy" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource name="getContentByCategory" result-element="search-metadata">
+            <parameter name="categoryKeys">82</parameter>
+            <parameter name="levels">1</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy">@timestamp DESC</parameter>
+            <parameter name="index">${select(param.index, '0')}</parameter>
+            <parameter name="count">15</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">2</parameter>
+            <parameter name="parentLevel">1</parameter>
+            <!--<parameter name="facets">
+                <facets>
+                    <terms-stats name="recent-searches">
+                        <index>timestamp</index>
+                        <value-index>data.query</value-index>
+                        <orderby>term</orderby>
+                        <count>15</count>
+                    </terms-stats>
+                </facets>
+            </parameter>-->
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Document show">
+      <portlet name="stats-data-contenttype-owner-modifier">
         <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isnotblank(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = '${select(param.contenttype, '')}'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <terms name="contenttype-modifier">
+                  <indexes>modifier/qualifiedname</indexes>
+                  <orderby>hits DESC</orderby>
+                </terms>
+                <terms name="contenttype-owner">
+                  <indexes>owner/qualifiedname</indexes>
+                  <orderby>hits DESC</orderby>
+                </terms>
+                <date-histogram name="contenttype-count">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--If no contenttype, display statistics of all contenttypes-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <terms name="contenttypes-count">
+                  <indexes>contenttype</indexes>
+                  <orderby>hits DESC</orderby>
+                </terms>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Portlet example">
-        <datasources />
-      </portlet>
-      <portlet name="Formbuilder">
-        <datasources querystringcontext="true">
-          <datasource>
-            <methodname>getMenuItem</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="withParents" type="boolean">false</parameter>
-              <parameter name="details" type="boolean">true</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Destination show">
+      <portlet name="social-nav">
         <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="data" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
+          <datasource name="getSessionContext"/>
         </datasources>
       </portlet>
-      <portlet name="Destination list">
+      <portlet name="stats-count-contenttypes-over-time">
         <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">contenttype = 'destination'</parameter>
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">${select(param.index, 0)}</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">24</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="product">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--<datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+              <parameter name="categoryKeys">9</parameter>
+              <parameter name="levels">3</parameter>
+              <parameter name="query"/>
+              <parameter name="orderBy"/>
+              <parameter name="index">${select(param.index, 0)}</parameter>
+              <parameter name="count">0</parameter>
+              <parameter name="includeData">true</parameter>
+              <parameter name="childrenLevel">1</parameter>
+              <parameter name="parentLevel">0</parameter>
+              <parameter name="facets">
+                  <facets>
+                      <date-histogram name="company">
+                          <index>timestamp</index>
+                          <interval>${select(param.interval,'month')}</interval>
+                      </date-histogram>
+                  </facets>
+              </parameter>
+          </datasource>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+              <parameter name="categoryKeys">57</parameter>
+              <parameter name="levels">3</parameter>
+              <parameter name="query"/>
+              <parameter name="orderBy"/>
+              <parameter name="index">${select(param.index, 0)}</parameter>
+              <parameter name="count">0</parameter>
+              <parameter name="includeData">true</parameter>
+              <parameter name="childrenLevel">1</parameter>
+              <parameter name="parentLevel">0</parameter>
+              <parameter name="facets">
+                  <facets>
+                      <date-histogram name="productcomponent">
+                          <index>timestamp</index>
+                          <interval>${select(param.interval,'month')}</interval>
+                      </date-histogram>
+                  </facets>
+              </parameter>
+          </datasource>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+              <parameter name="categoryKeys">18</parameter>
+              <parameter name="levels">3</parameter>
+              <parameter name="query"/>
+              <parameter name="orderBy"/>
+              <parameter name="index">${select(param.index, 0)}</parameter>
+              <parameter name="count">0</parameter>
+              <parameter name="includeData">true</parameter>
+              <parameter name="childrenLevel">1</parameter>
+              <parameter name="parentLevel">0</parameter>
+              <parameter name="facets">
+                  <facets>
+                      <date-histogram name="nutrient">
+                          <index>timestamp</index>
+                          <interval>${select(param.interval,'month')}</interval>
+                      </date-histogram>
+                  </facets>
+              </parameter>
+          </datasource>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+              <parameter name="categoryKeys">7</parameter>
+              <parameter name="levels">3</parameter>
+              <parameter name="query"/>
+              <parameter name="orderBy"/>
+              <parameter name="index">${select(param.index, 0)}</parameter>
+              <parameter name="count">0</parameter>
+              <parameter name="includeData">true</parameter>
+              <parameter name="childrenLevel">1</parameter>
+              <parameter name="parentLevel">0</parameter>
+              <parameter name="facets">
+                  <facets>
+                      <date-histogram name="additive">
+                          <index>timestamp</index>
+                          <interval>${select(param.interval,'month')}</interval>
+                      </date-histogram>
+                  </facets>
+              </parameter>
+          </datasource>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+              <parameter name="categoryKeys">19</parameter>
+              <parameter name="levels">3</parameter>
+              <parameter name="query"/>
+              <parameter name="orderBy"/>
+              <parameter name="index">${select(param.index, 0)}</parameter>
+              <parameter name="count">0</parameter>
+              <parameter name="includeData">true</parameter>
+              <parameter name="childrenLevel">1</parameter>
+              <parameter name="parentLevel">0</parameter>
+              <parameter name="facets">
+                  <facets>
+                      <date-histogram name="opinion">
+                          <index>timestamp</index>
+                          <interval>${select(param.interval,'month')}</interval>
+                      </date-histogram>
+                  </facets>
+              </parameter>
+          </datasource>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+              <parameter name="categoryKeys">12</parameter>
+              <parameter name="levels">3</parameter>
+              <parameter name="query"/>
+              <parameter name="orderBy"/>
+              <parameter name="index">${select(param.index, 0)}</parameter>
+              <parameter name="count">0</parameter>
+              <parameter name="includeData">true</parameter>
+              <parameter name="childrenLevel">1</parameter>
+              <parameter name="parentLevel">0</parameter>
+              <parameter name="facets">
+                  <facets>
+                      <date-histogram name="filter">
+                          <index>timestamp</index>
+                          <interval>${select(param.interval,'month')}</interval>
+                      </date-histogram>
+                  </facets>
+              </parameter>
+          </datasource>-->
+        </datasources>
+      </portlet>
+      <portlet name="stats-count-contenttypes-over-time (kopi)">
+        <datasources>  <!--company-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">24</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="product">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--product-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">9</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="company">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--productcomponent-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">57</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="productcomponent">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--nutrients-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">18</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="nutrient">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--additive-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">7</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="additive">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--opinion-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">19</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="opinion">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <!--filter-->
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">12</parameter>
+            <parameter name="levels">3</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="filter">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'day')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
-      <portlet name="Downloads">
+      <portlet name="stats-data-contenttype-additions-over-time">
         <datasources>
-          <datasource>
-            <methodname>getCategories</methodname>
-            <parameters>
-              <parameter name="cat" type="int">17</parameter>
-              <parameter name="levels" type="int">0</parameter>
-              <parameter name="contentCount" type="boolean">false</parameter>
-              <parameter name="includeCurrent" type="boolean">true</parameter>
-            </parameters>
+          <datasource condition="${isnotblank(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = '${select(param.contenttype, '')}'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="contenttype-count">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
-          <datasource>
-            <methodname>getContentByCategory</methodname>
-            <parameters>
-              <parameter name="cat" type="int[]">17</parameter>
-              <parameter name="levels" type="int">0</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderBy" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1000</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query"/>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="all">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Article list ">
-        <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">contenttype = 'article'</parameter>
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">${select(param.index, 0)}</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = 'Opinion'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="opinion">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Article mini list">
-        <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${select(param.articleSectionId, select(param.id, -1))}</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string">contenttype = 'article'</parameter>
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">3</parameter>
-              <parameter name="includeData" type="boolean">false</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = 'Filter'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="filter">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Article show">
-        <datasources>
-          <datasource>
-            <methodname>getContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1</parameter>
-              <parameter name="data" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = 'Product'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="product">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Twitranet">
-        <datasources>
-          <datasource>
-            <methodname>getContentByCategory</methodname>
-            <parameters>
-              <parameter name="cat" type="int[]">${select(param.twitranetCategoryKey, 26)}</parameter>
-              <parameter name="levels" type="int">0</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderBy" type="string">@key DESC</parameter>
-              <parameter name="index" type="int">${select(param.index, 0)}</parameter>
-              <parameter name="count" type="int">${select(param.count, 5)}</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = 'ProductComponent'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="productcomponent">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
-        </datasources>
-      </portlet>
-      <portlet name="Comments">
-        <datasources sessioncontext="true">
-          <datasource>
-            <methodname>getRelatedContent</methodname>
-            <parameters>
-              <parameter name="key" type="int[]">${select(param.key, -1)}</parameter>
-              <parameter name="relation" type="int">-1</parameter>
-              <parameter name="query" type="string">contenttype = 'comment'</parameter>
-              <parameter name="orderby" type="string">@publishfrom ASC</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">1000</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = 'Additive'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="additive">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
+          </datasource>
+          <datasource condition="${isempty(param.contenttype)}" name="getContentByCategory">
+            <parameter name="categoryKeys">1</parameter>
+            <parameter name="levels">6</parameter>
+            <parameter name="query">contenttype = 'Company'</parameter>
+            <parameter name="orderBy"/>
+            <parameter name="index">${select(param.index, 0)}</parameter>
+            <parameter name="count">0</parameter>
+            <parameter name="includeData">true</parameter>
+            <parameter name="childrenLevel">1</parameter>
+            <parameter name="parentLevel">0</parameter>
+            <parameter name="facets">
+              <facets>
+                <date-histogram name="company">
+                  <index>timestamp</index>
+                  <interval>${select(param.interval,'month')}</interval>
+                </date-histogram>
+              </facets>
+            </parameter>
           </datasource>
         </datasources>
       </portlet>
     </portlets>
     <page-templates>
-      <page-template name="Robots txt">
-        <datasources />
+      <page-template name="page">
+        <datasources/>
       </page-template>
-      <page-template name="Google sitemap">
-        <datasources>
-          <datasource>
-            <methodname>getMenu</methodname>
-            <parameters>
-              <parameter name="menuKey" type="int">0</parameter>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">x,y,z</parameter>
-              <parameter name="levels" type="int">1</parameter>
-              <parameter name="query" type="string" />
-              <parameter name="orderby" type="string" />
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">10000</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">0</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="RSS producer">
-        <datasources>
-          <datasource>
-            <methodname>getContentBySection</methodname>
-            <parameters>
-              <parameter name="id" type="int[]">${select(param.articleSectionId, 30)}</parameter>
-              <parameter name="levels" type="int">${select(param.articleLevels, 0)}</parameter>
-              <parameter name="query" type="string">contenttype = 'article'</parameter>
-              <parameter name="orderby" type="string">@timestamp DESC</parameter>
-              <parameter name="index" type="int">0</parameter>
-              <parameter name="count" type="int">10</parameter>
-              <parameter name="includeData" type="boolean">true</parameter>
-              <parameter name="childrenLevel" type="int">1</parameter>
-              <parameter name="parentLevel" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getMenuItem</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${select(param.articleSectionId, 30)}</parameter>
-              <parameter name="withParents" type="boolean">false</parameter>
-              <parameter name="details" type="boolean">false</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Standard">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Document">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Formbuilder">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Destination">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Destination list">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Event">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Event list">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Passport">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getUserstore</methodname>
-            <parameters>
-              <parameter name="userstore" type="string" />
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getTimeZones</methodname>
-            <parameters />
-          </datasource>
-          <datasource>
-            <methodname>getLocales</methodname>
-            <parameters />
-          </datasource>
-          <datasource>
-            <methodname>getCountries</methodname>
-            <parameters>
-              <parameter name="countryCodes" type="string[]" />
-              <parameter name="includeRegions" type="boolean">true</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Article list">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
-      </page-template>
-      <page-template name="Article">
-        <datasources>
-          <datasource result-element="menu">
-            <methodname>getMenuBranch</methodname>
-            <parameters>
-              <parameter name="menuItemKey" type="int">${portal.pageKey}</parameter>
-              <parameter name="includeTopLevel" type="boolean">true</parameter>
-              <parameter name="startLevel" type="int">0</parameter>
-              <parameter name="levels" type="int">0</parameter>
-            </parameters>
-          </datasource>
-          <datasource>
-            <methodname>getPreferences</methodname>
-            <parameters>
-              <parameter name="scope" type="string">*</parameter>
-              <parameter name="wildCardkey" type="string">*</parameter>
-            </parameters>
-          </datasource>
-        </datasources>
+      <page-template name="search-result">
+        <datasources/>
       </page-template>
     </page-templates>
   </site>
   <content-types>
-    <content-type name="article" key="1001">
+    <content-type key="1002" name="Product">
       <moduledata>
-        <config>
+        <config name="Product" version="1.1">
           <form>
-            <title name="heading" />
-            <block name="Article">
-              <input name="heading" required="true" type="text">
-                <display>Heading</display>
-                <xpath>contentdata/heading</xpath>
+            <title name="name"/>
+            <block name="Product">
+              <input name="iiid" required="false" type="text">
+                <display>Informed individual id</display>
+                <xpath>contentdata/iiid</xpath>
               </input>
-              <input name="preface" type="textarea">
-                <display>Preface</display>
-                <xpath>contentdata/preface</xpath>
+              <input name="barcode" type="text">
+                <display>Barcode</display>
+                <xpath>contentdata/barcode</xpath>
               </input>
-              <input config="lightwithtable" mode="xhtml" name="text" required="true" type="htmlarea">
-                <display>Text</display>
-                <xpath>contentdata/text</xpath>
+              <input name="name" required="true" type="text">
+                <display>name</display>
+                <xpath>contentdata/name</xpath>
+              </input>
+              <input name="image-name" required="false" type="text">
+                <display>image-name</display>
+                <xpath>contentdata/image-name</xpath>
+              </input>
+              <input name="size" type="text">
+                <display>size</display>
+                <xpath>contentdata/size</xpath>
               </input>
             </block>
-            <block group="contentdata/image" name="Image">
-              <input name="image" type="image">
+            <block name="Product info">
+              <input multiple="true" name="image" type="relatedcontent">
                 <display>Image</display>
-                <xpath>image</xpath>
+                <xpath>contentdata/image</xpath>
+                <contenttype name="Image"/>
               </input>
-              <input name="image_text" type="textarea">
-                <display>Image text</display>
-                <xpath>image_text</xpath>
+              <input multiple="false" name="company" required="false" type="relatedcontent">
+                <display>Company</display>
+                <xpath>contentdata/company</xpath>
+                <contenttype name="Company"/>
+              </input>
+              <input multiple="true" name="productlabels" required="false" type="relatedcontent">
+                <display>Product labels</display>
+                <xpath>contentdata/productlabels</xpath>
+                <contenttype name="Productlabel"/>
               </input>
             </block>
-            <block group="contentdata/link" name="Related link">
-              <input name="url" type="url">
-                <display>URL</display>
-                <xpath>url</xpath>
+            <block name="Product nutrients">
+              <input name="energy-kcal" required="false" type="text">
+                <display>Energy (kcal)</display>
+                <xpath>contentdata/energy-kcal</xpath>
               </input>
-              <input name="description" type="text">
+              <input name="fat" required="false" type="text">
+                <display>Fat</display>
+                <xpath>contentdata/fat</xpath>
+              </input>
+              <input name="protein" required="false" type="text">
+                <display>Protein</display>
+                <xpath>contentdata/protein</xpath>
+              </input>
+              <input name="carbohydrates" required="false" type="text">
+                <display>Carbohydrates</display>
+                <xpath>contentdata/carbohydrates</xpath>
+              </input>
+            </block>
+            <block name="Product components">
+              <input multiple="true" name="product-components" required="false" type="relatedcontent">
+                <display>Product Components</display>
+                <xpath>contentdata/product-components</xpath>
+                <contenttype name="ProductComponent"/>
+              </input>
+            </block>
+            <block name="Product opinions">
+              <input multiple="true" name="opinions" required="false" type="relatedcontent">
+                <display>Opinions</display>
+                <xpath>contentdata/opinions</xpath>
+                <contenttype name="Opinion"/>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import mode="csv" name="product-import" purge="delete" separator="~" skip="2" status="2" sync="barcode">
+              <mapping dest="barcode" src="1"/>
+              <mapping dest="name" src="2"/>
+              <mapping dest="company" relatedcontenttype="Company" relatedfield="name" src="3"/>
+              <mapping dest="productlabels" relatedcontenttype="Productlabel" relatedfield="name" separator=";" src="4"/>
+              <mapping dest="opinions" relatedcontenttype="Opinion" relatedfield="iiid" separator=";" src="5"/>
+              <mapping dest="product-components" relatedcontenttype="ProductComponent" relatedfield="iiid" separator=";" src="6"/>
+            </import>
+          </imports>
+        </config>
+        <browse>
+          <column clickable="true" title="Barcode">
+            <xpath>contentdata/barcode</xpath>
+          </column>
+          <column clickable="true" maincolumn="true" title="Name">
+            <xpath>contentdata/name</xpath>
+          </column>
+          contentdata/image
+          <column clickable="true" title="Company">
+            <xpath>contentdata/company/@key</xpath>
+          </column>
+          <column clickable="true" title="Image">
+            <xpath>contentdata/image/@key</xpath>
+          </column>
+          <column clickable="true" title="Product components">
+            <xpath>contentdata/product-components/content/@key</xpath>
+          </column>
+          <column clickable="true" title="Productlabels">
+            <xpath>contentdata/productlabels/content/@key</xpath>
+          </column>
+          <column clickable="true" title="Published from">
+            <xpath>@publishfrom</xpath>
+          </column>
+          <column clickable="true" title="Last modified">
+            <xpath>@timestamp</xpath>
+          </column>
+          <column clickable="true" title="Owner">
+            <owner/>
+          </column>
+          <column clickable="true" title="Modifier">
+            <modifier/>
+          </column>
+        </browse>
+        <indexparameters>
+          <index name="iiid" xpath="contentdata/iiid"/>
+          <index name="barcode" xpath="contentdata/barcode"/>
+          <index name="name" xpath="contentdata/name"/>
+          <index name="product-components" xpath="contentdata/product-components/content/@key"/>
+          <index name="productlabels" xpath="contentdata/productlabels/content/@key"/>
+          <index name="company" xpath="contentdata/company"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1003" name="Filter">
+      <moduledata>
+        <config name="Filter" version="1.0">
+          <form>
+            <title name="iiid"/>
+            <block name="id">
+              <input name="iiid" required="true" type="text">
+                <display>iiid</display>
+                <xpath>contentdata/iiid</xpath>
+              </input>
+              <input name="opinions" type="relatedcontent">
+                <display>Opinions</display>
+                <xpath>contentdata/opinions</xpath>
+                <contenttype name="Opinion"/>
+              </input>
+            </block>
+            <block group="contentdata/languages/language" name="Languages">
+              <input multiple="false" name="language" required="true" type="relatedcontent">
+                <display>Language</display>
+                <xpath>language</xpath>
+                <contenttype name="Language"/>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>name</xpath>
+              </input>
+              <input name="description" required="true" type="textarea">
                 <display>Description</display>
                 <xpath>description</xpath>
               </input>
-              <input name="destination" type="dropdown">
-                <display>Open in</display>
-                <xpath>target</xpath>
-                <options>
-                  <option value="new">New window</option>
-                  <option value="current">Current window</option>
-                </options>
+              <input name="url" required="false" type="text">
+                <display>Url</display>
+                <xpath>url</xpath>
               </input>
             </block>
-            <block group="contentdata/file" name="Related file">
-              <input name="file" type="file">
-                <display>File</display>
-                <xpath>file</xpath>
+            <block name="Filter image">
+              <input multiple="false" name="image" type="relatedcontent">
+                <display>Image</display>
+                <xpath>contentdata/image</xpath>
+                <contenttype name="Image"/>
               </input>
             </block>
-            <block name="Related articles">
-              <input name="articles" type="relatedcontent">
-                <display>Articles</display>
-                <xpath>contentdata/articles</xpath>
-                <contenttype name="article" />
+          </form>
+          <imports>
+            <import base="/filters/filter" mode="xml" name="filter-import" status="2" sync="iiid">
+              <mapping dest="iiid" src="iiid"/>
+              <mapping dest="image" relatedcontenttype="Image" relatedfield="name" src="image"/>
+              <block base="languages/language" dest="Languages" purge="true" sync="language">
+                <mapping dest="language" relatedcontenttype="Language" relatedfield="name" src="language"/>
+                <mapping dest="name" src="name"/>
+                <mapping dest="description" src="description"/>
+                <mapping dest="url" src="url"/>
+              </block>
+              <mapping dest="opinions" relatedcontenttype="Opinion" relatedfield="iiid" src="opinions/opinion/@iiid"/>
+            </import>
+          </imports>
+        </config>
+        <browse>
+          <column title="iiid">
+            <xpath>contentdata/iiid</xpath>
+          </column>
+          <column title="Owner">
+            <owner/>
+          </column>
+          <column title="Modifier">
+            <modifier/>
+          </column>
+          <column title="Last modified">
+            <xpath>@timestamp</xpath>
+          </column>
+        </browse>
+        <indexparameters>
+          <index name="iiid" xpath="contentdata/iiid"/>
+          <index name="owner" xpath="owner/qualifiedName"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1004" name="Company">
+      <moduledata>
+        <config name="Company" version="1.0">
+          <form>
+            <title name="name"/>
+            <block name="Company">
+              <input name="iiid" required="false" type="text">
+                <display>iiid</display>
+                <xpath>contentdata/iiid</xpath>
+              </input>
+              <input name="opencorporates-url" required="false" type="text">
+                <display>Opencorporates url</display>
+                <xpath>contentdata/opencorporates-url</xpath>
+              </input>
+              <input name="brreg-orgno" required="false" type="text">
+                <display>Brreg organization number</display>
+                <xpath>contentdata/brreg-orgno</xpath>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
+              </input>
+              <input name="email" required="false" type="text">
+                <display>Email</display>
+                <xpath>contentdata/email</xpath>
+              </input>
+              <input name="www" required="false" type="text">
+                <display>WWW</display>
+                <xpath>contentdata/www</xpath>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import mode="csv" name="company-name-import" purge="delete" separator="|" skip="2" status="2" sync="name">
+              <mapping dest="name" src="1"/>
+            </import>
+          </imports>
+        </config>
+        <indexparameters>
+          <index name="iiid" xpath="contentdata/iiid"/>
+          <index name="opencorporates-url" xpath="contentdata/opencorporates-url"/>
+          <index name="brreg-orgno" xpath="contentdata/brreg-orgno"/>
+          <index name="name" xpath="contentdata/name"/>
+          <index name="www" xpath="contentdata/www"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1005" name="Nutrition">
+      <moduledata>
+        <config name="Nutrient" version="1.0">
+          <form>
+            <title name="name"/>
+            <block name="Nutrient">
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
               </input>
             </block>
           </form>
         </config>
-      </moduledata>
-    </content-type>
-    <content-type name="file" key="1002">
-      <moduledata>
-        <browse>
-          <column maincolumn="true" orderby="contentdata/name">
-            <filename xpath="contentdata/name" />
-          </column>
-          <column columnalign="center" title="Download" titlealign="center" width="100">
-            <binarylink newwindow="true" text="Download" xpath="contentdata/binarydata/@key" />
-          </column>
-          <column columnalign="right" title="Filesize" titlealign="center" width="100">
-            <filesize xpath="contentdata/filesize" />
-          </column>
-          <column>
-            <timestamp />
-          </column>
-        </browse>
         <indexparameters>
-          <index type="text" xpath="contentdata/name" />
-          <index type="text" xpath="contentdata/description" />
-          <index type="text" xpath="contentdata/keywords/keyword" />
+          <index name="name" xpath="contentdata/name"/>
         </indexparameters>
       </moduledata>
     </content-type>
-    <content-type name="image" key="1003">
+    <content-type key="1006" name="_Ingredient">
       <moduledata>
-        <browse>
-          <column maincolumn="true" orderby="title" title="Name">
-            <title />
-          </column>
-          <column columnalign="center" title="Original size" titlealign="center" width="100">
-            <xpath>contentdata/images/image[@type = 'original']/width</xpath>
-            <text>x</text>
-            <xpath>contentdata/images/image[@type = 'original']/height</xpath>
-          </column>
-          <column>
-            <timestamp />
-          </column>
-        </browse>
+        <config name="Ingredient" version="1.0">
+          <form>
+            <title name="common-name"/>
+            <block name="Ingredient">
+              <input name="chemspider-id" required="true" type="text">
+                <display>ChemSpider Id</display>
+                <xpath>contentdata/chemspider-id</xpath>
+              </input>
+              <input name="common-name" required="true" type="text">
+                <display>Common name</display>
+                <xpath>contentdata/common-name</xpath>
+              </input>
+              <input name="description-url" required="true" type="text">
+                <display>Description url</display>
+                <xpath>contentdata/description-url</xpath>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import base="/ingredients/ingredient" mode="xml" name="ingredients-import-xml" purge="delete" status="2" sync="chemspider-id">
+              <mapping dest="chemspider-id" src="chemspider-id"/>
+              <mapping dest="common-name" src="common-name"/>
+              <mapping dest="description-url" src="description-url"/>
+            </import>
+          </imports>
+        </config>
         <indexparameters>
-          <index type="text" xpath="contentdata/name" />
-          <index type="text" xpath="contentdata/description" />
-          <index type="text" xpath="contentdata/photographer/@name" />
-          <index type="text" xpath="contentdata/photographer/@email" />
-          <index type="text" xpath="contentdata/copyright" />
-          <index type="text" xpath="contentdata/keywords" />
+          <index name="chemspider-id" xpath="contentdata/chemspider-id"/>
+          <index name="common-name" xpath="contentdata/common-name"/>
         </indexparameters>
       </moduledata>
     </content-type>
-    <content-type name="document" key="1004">
+    <content-type key="1007" name="Additive">
+      <moduledata>
+        <config name="Additive" version="1.0">
+          <form>
+            <title name="name"/>
+            <block name="Additive">
+              <input name="code" required="true" type="text">
+                <display>Code</display>
+                <xpath>contentdata/code</xpath>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
+              </input>
+              <input name="type" required="fale" type="text">
+                <display>Type</display>
+                <xpath>contentdata/type</xpath>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import mode="csv" name="additives-import-csv" purge="delete" separator=";" skip="1" status="2" sync="code">
+              <mapping dest="code" src="1"/>
+              <mapping dest="name" src="2"/>
+              <mapping dest="type" src="3"/>
+            </import>
+          </imports>
+        </config>
+        <browse>
+          <column title="Code">
+            <xpath>contentdata/code</xpath>
+          </column>
+          <column title="Name">
+            <xpath>contentdata/name</xpath>
+          </column>
+          <column title="Type">
+            <xpath>contentdata/type</xpath>
+          </column>
+          <column title="Published from">
+            <xpath>@publishfrom</xpath>
+          </column>
+          <column title="Last modified">
+            <xpath>@timestamp</xpath>
+          </column>
+          <column title="Owner">
+            <owner/>
+          </column>
+          <column title="Modifier">
+            <modifier/>
+          </column>
+        </browse>
+        <indexparameters>
+          <index name="code" xpath="contentdata/code"/>
+          <index name="name" xpath="contentdata/name"/>
+          <index name="type" xpath="contentdata/type"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1008" name="_County">
+      <moduledata>
+        <config name="County" version="1.0">
+          <form>
+            <title name="name"/>
+            <block name="County">
+              <input name="code" required="true" type="text">
+                <display>Code</display>
+                <xpath>contentdata/code</xpath>
+                <help>http://en.wikipedia.org/wiki/ISO_3166-2</help>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
+                <help>http://en.wikipedia.org/wiki/ISO_3166-2</help>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import base="/counties/county" mode="xml" name="county-import-xml" status="0" sync="code">
+              <mapping dest="code" src="@id"/>
+              <mapping dest="name" src="name"/>
+            </import>
+          </imports>
+        </config>
+        <indexparameters>
+          <index name="code" xpath="contentdata/code"/>
+          <index name="name" xpath="contentdata/name"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1009" name="Article">
       <moduledata>
         <config>
           <form>
-            <title name="heading" />
+            <title name="heading"/>
+            <block name="Meta information">
+              <input name="meta-name" required="true" type="text">
+                <display>Meta name</display>
+                <xpath>contentdata/meta-name</xpath>
+              </input>
+              <input name="meta-description" type="textarea">
+                <display>Meta description</display>
+                <xpath>contentdata/meta-description</xpath>
+              </input>
+              <input name="meta-keywords" type="text">
+                <display>Meta keywords</display>
+                <xpath>contentdata/meta-keywords</xpath>
+                <help>Comma separated</help>
+              </input>
+            </block>
+            <block name="Article">
+              <input name="display-creator" type="checkbox">
+                <display>Display author</display>
+                <xpath>contentdata/display-author</xpath>
+                <help>Displays document owner as author.</help>
+              </input>
+              <input name="display-date" type="checkbox">
+                <display>Display date</display>
+                <xpath>contentdata/display-date</xpath>
+                <help>Displays published date</help>
+              </input>
+              <input name="heading" required="true" type="text">
+                <display>Heading</display>
+                <xpath>contentdata/heading</xpath>
+              </input>
+              <input name="tagline" required="false" type="text">
+                <display>Tagline</display>
+                <xpath>contentdata/tagline</xpath>
+              </input>
+              <input name="preface" required="true" type="textarea">
+                <cols value="57"/>
+                <rows value="6"/>
+                <display>Preface</display>
+                <xpath>contentdata/preface</xpath>
+              </input>
+              <input name="read-more-text" required="false" type="text">
+                <display>Read more text</display>
+                <xpath>contentdata/read-more-text</xpath>
+              </input>
+              <input config="document" height="300" mode="xhtml" name="text" required="true" type="htmlarea" width="500">
+                <display>Text</display>
+                <xpath>contentdata/text</xpath>
+              </input>
+            </block>
+            <block group="contentdata/imagerows/imagerow" name="Images">
+              <input multiple="true" name="image" type="relatedcontent">
+                <display>Image</display>
+                <xpath>image</xpath>
+                <contenttype name="Image"/>
+              </input>
+            </block>
+          </form>
+        </config>
+        <indexparameters>
+          <index name="meta-name" xpath="contentdata/meta-name"/>
+          <index name="meta-description" xpath="contentdata/meta-description"/>
+          <index name="meta-keywords" xpath="contentdata/meta-keywords"/>
+          <index name="title" xpath="contentdata/title"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1010" name="Document">
+      <moduledata>
+        <config>
+          <form>
+            <title name="heading"/>
             <block name="Document">
               <input name="heading" required="true" type="text">
                 <display>Heading</display>
@@ -1256,152 +1584,522 @@
                 <xpath>contentdata/text</xpath>
               </input>
             </block>
+            <block name="Meta information">
+              <input name="meta-keywords" type="text">
+                <display>Meta keywords</display>
+                <xpath>contentdata/meta-keywords</xpath>
+                <help>Comma separated</help>
+              </input>
+              <input name="meta-description" type="textarea">
+                <display>Meta description</display>
+                <xpath>contentdata/meta-description</xpath>
+              </input>
+            </block>
           </form>
         </config>
       </moduledata>
     </content-type>
-    <content-type name="destination" key="1007">
+    <content-type key="1013" name="Url">
       <moduledata>
-        <config>
+        <config name="Url" version="1.0">
+
+
           <form>
-            <title name="heading" />
-            <block name="Destination">
-              <input name="heading" required="true" type="text">
-                <display>Heading</display>
-                <xpath>contentdata/heading</xpath>
+
+
+            <title name="url"/>
+
+
+            <block name="Url">
+
+
+              <input name="url" required="true" type="text">
+
+
+                <display>Url</display>
+
+
+                <xpath>contentdata/url</xpath>
+
+
               </input>
-              <input name="preface" type="textarea">
-                <display>Preface</display>
-                <xpath>contentdata/preface</xpath>
-              </input>
-              <input mode="xhtml" name="text" required="true" type="htmlarea">
-                <display>Text</display>
-                <xpath>contentdata/text</xpath>
-              </input>
+
+
             </block>
-            <block group="contentdata/image" name="Image">
-              <input name="image" type="image">
-                <display>Image</display>
-                <xpath>image</xpath>
-              </input>
-              <input name="image_text" type="textarea">
-                <display>Image text</display>
-                <xpath>image_text</xpath>
-              </input>
-            </block>
-            <block group="contentdata/link" name="Related link">
-              <input name="url" type="url">
-                <display>URL</display>
-                <xpath>url</xpath>
-              </input>
-              <input name="description" type="text">
-                <display>Description</display>
-                <xpath>description</xpath>
-              </input>
-              <input name="destination" type="dropdown">
-                <display>Open in</display>
-                <xpath>target</xpath>
-                <options>
-                  <option value="new">New window</option>
-                  <option value="current">Current window</option>
-                </options>
-              </input>
-            </block>
-            <block group="contentdata/file" name="Related file">
-              <input name="file" type="file">
-                <display>File</display>
-                <xpath>file</xpath>
-              </input>
-            </block>
-            <block name="Related destinations">
-              <input name="articles" type="relatedcontent">
-                <display>Destinations</display>
-                <xpath>contentdata/articles</xpath>
-                <contenttype name="destination" />
-              </input>
-            </block>
+
+
           </form>
+
+
         </config>
-      </moduledata>
-    </content-type>
-    <content-type name="form" key="1006">
-      <moduledata>
-        <browse>
-          <column>
-            <title />
-          </column>
-          <column>
-            <contenttype />
-          </column>
-          <column>
-            <timestamp />
-          </column>
-        </browse>
         <indexparameters>
-          <index type="text" xpath="contentdata/form/item/data" />
+          <index name="url" xpath="contentdata/url"/>
         </indexparameters>
       </moduledata>
     </content-type>
-    <content-type name="twitranet" key="1008">
+    <content-type key="1014" name="_Story">
       <moduledata>
-        <config name="Todo" version="1.0">
+        <config name="Story" version="1.0">
           <form>
-            <title name="message" />
-            <block name="Twitranett">
-              <input name="message" required="true" type="text">
-                <display>Message</display>
-                <xpath>contentdata/message</xpath>
+            <title name="name"/>
+            <block name="Story">
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
               </input>
-              <input name="latitude" type="text">
-                <display>Latitude</display>
-                <xpath>contentdata/latitude</xpath>
+              <input name="description" required="true" type="textarea">
+                <display>Description</display>
+                <xpath>contentdata/description</xpath>
               </input>
-              <input name="longitude" type="text">
-                <display>Longitude</display>
-                <xpath>contentdata/longitude</xpath>
+            </block>
+            <block group="contentdata/reference-urls" name="Reference Urls">
+              <input name="reference-url" type="url">
+                <display>References</display>
+                <xpath>contentdata/reference-url</xpath>
+                <help>URL references add to the credibility of your story</help>
+              </input>
+            </block>
+          </form>
+        </config>
+        <browse>
+          <column title="Name">
+            <xpath>contentdata/name</xpath>
+          </column>
+          <column title="Owner">
+            <owner/>
+          </column>
+          <column title="Modifier">
+            <modifier/>
+          </column>
+          <column title="Last modified">
+            <xpath>@timestamp</xpath>
+          </column>
+        </browse>
+        <indexparameters>
+          <index name="name" xpath="contentdata/name"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1015" name="Productlabel">
+      <moduledata>
+        <config name="Productlabel" version="1.0">
+          <form>
+            <title name="name"/>
+            <block name="Productlabel">
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
+              </input>
+              <input name="image" type="image">
+                <display>Image</display>
+                <xpath>contentdata/Image</xpath>
+              </input>
+              <input name="description" type="textarea">
+                <display>Description</display>
+                <xpath>contentdata/description</xpath>
+              </input>
+              <input name="url" type="text">
+                <display>Url</display>
+                <xpath>contentdata/url</xpath>
+              </input>
+            </block>
+          </form>
+        </config>
+        <indexparameters>
+          <index name="name" xpath="contentdata/name"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1017" name="oikos-product-request">
+      <moduledata>
+        <config name="oikos-product-request" version="1.0">
+          <form>
+            <title name="product"/>
+            <block name="Jeg ville blitt glad for økologisk">
+              <input name="product" required="true" type="text">
+                <display>Produkt</display>
+                <xpath>contentdata/product</xpath>
+                <help>Navn på det økologiske produktet du skulle ønsker var
+                  tilgjengelig.
+                </help>
+              </input>
+              <input name="product-type" required="false" type="radiobutton">
+                <display>Matgruppe</display>
+                <xpath>contentdata/product-type</xpath>
+                <options>
+                  <option value="1">Ferskmat</option>
+                  <option value="2">Tørrmat</option>
+                  <option value="3">Frukt og grønt</option>
+                </options>
+                <help>Her kan du fylle inn matgruppe for produktet du ønsker var
+                  tilgjengelig
+                </help>
+              </input>
+              <input multiple="false" name="company" required="true" type="relatedcontent">
+                <display>Butikk</display>
+                <xpath>contentdata/company</xpath>
+                <contenttype name="Company"/>
+                <help>Velg butikk!</help>
+              </input>
+              <input multiple="false" name="county" required="true" type="relatedcontent">
+                <display>Fylke</display>
+                <xpath>contentdata/county</xpath>
+                <contenttype name="County"/>
+                <help>Velg fylke!</help>
+              </input>
+              <input name="place" required="false" type="text">
+                <display>Sted</display>
+                <xpath>contentdata/place</xpath>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import base="/productrequests/productrequest" mode="xml" name="productrequest-import-xml" status="0">
+              <mapping dest="product" src="product"/>
+              <mapping dest="product-type" src="product-type"/>
+              <mapping dest="company" src="company"/>
+              <mapping dest="county" src="county"/>
+              <mapping dest="place" src="place"/>
+            </import>
+          </imports>
+        </config>
+        <indexparameters>
+          <index name="id" xpath="contentdata/id"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1018" name="Opinion">
+      <moduledata>
+        <config name="Opinion" version="1.0">
+          <form>
+            <title name="iiid"/>
+            <block name="Opinion">
+              <input name="iiid" required="true" type="text">
+                <display>iiid</display>
+                <xpath>contentdata/iiid</xpath>
+              </input>
+              <input name="score" required="true" type="text" validate="integer">
+                <display>Score</display>
+                <xpath>contentdata/score</xpath>
+                <regexp>\b([0-9]|[1-9][0-9]|1[0][0])\b</regexp>
+                <help>Opinion is a percentage between -1 and 100, of which 0 is
+                  worst and 100 is best. -1 means it is a deal-breaker, f.ex used with severe allergies
+                </help>
+              </input>
+              <input multiple="false" name="image" type="relatedcontent">
+                <display>Image</display>
+                <xpath>contentdata/image</xpath>
+                <contenttype name="Image"/>
+              </input>
+            </block>
+            <block group="contentdata/languages/language" name="Opinion languages">
+              <input multiple="false" name="language" required="true" type="relatedcontent">
+                <display>Language</display>
+                <xpath>language</xpath>
+                <contenttype name="Language"/>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>name</xpath>
+              </input>
+              <input name="description" required="true" type="textarea">
+                <display>Description</display>
+                <xpath>description</xpath>
+              </input>
+              <input name="url" required="false" type="text">
+                <display>Url</display>
+                <xpath>url</xpath>
+              </input>
+            </block>
+            <block name="Opinion targets">
+              <input multiple="true" name="url-target" required="false" type="relatedcontent">
+                <display>Url target</display>
+                <xpath>contentdata/url-target</xpath>
+                <contenttype name="Url"/>
+              </input>
+              <input multiple="true" name="company-target" required="false" type="relatedcontent">
+                <display>Company target</display>
+                <xpath>contentdata/company-target</xpath>
+                <contenttype name="Company"/>
+              </input>
+              <input multiple="true" name="product-target" required="false" type="relatedcontent">
+                <display>Product target</display>
+                <xpath>contentdata/product-target</xpath>
+                <contenttype name="Product"/>
+              </input>
+              <input multiple="true" name="productcomponent-target" required="false" type="relatedcontent">
+                <display>Productcomponent target</display>
+                <xpath>contentdata/productcomponent-target</xpath>
+                <contenttype name="ProductComponent"/>
+              </input>
+            </block>
+            <block group="contentdata/category-targets/category-target" name="Category targets">
+              <input name="category-key" type="text">
+                <display>Category key</display>
+                <xpath>category-key</xpath>
+              </input>
+              <input name="category-name" type="text">
+                <display>Category name</display>
+                <xpath>category-name</xpath>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import base="/opinions/opinion" mode="xml" name="opinion-import" status="2" sync="iiid">
+              <mapping dest="iiid" src="iiid"/>
+              <mapping dest="score" src="score"/>
+              <mapping dest="image" relatedcontenttype="Image" relatedfield="name" src="image"/>
+              <block base="languages/language" dest="Opinion languages" purge="true" sync="language">
+                <mapping dest="language" relatedcontenttype="Language" relatedfield="name" src="language"/>
+                <mapping dest="name" src="name"/>
+                <mapping dest="description" src="description"/>
+                <mapping dest="url" src="url"/>
+              </block>
+              <mapping dest="url-target" relatedcontenttype="Url" relatedfield="url" src="url-targets/url-target/@iiid"/>
+              <mapping dest="company-target" relatedcontenttype="Company" relatedfield="name" src="company-targets/company-target/@name"/>
+              <mapping dest="product-target" relatedcontenttype="Product" relatedfield="barcode"
+                       src="product-targets/product-target/@barcode"/>
+              <mapping dest="productcomponent-target" relatedcontenttype="ProductComponent" relatedfield="iiid"
+                       src="productcomponent-targets/productcomponent-target/@iiid"/>
+              <block base="category-targets/category-target" dest="Category targets" purge="true" sync="category-key">
+                <mapping dest="category-key" src="category-key"/>
+                <mapping dest="category-name" src="category-name"/>
+              </block>
+            </import>
+          </imports>
+        </config>
+        <browse>
+          <column title="iiid">
+            <xpath>contentdata/iiid</xpath>
+          </column>
+          <column title="Score">
+            <xpath>contentdata/score</xpath>
+          </column>
+          <column title="Owner">
+            <owner/>
+          </column>
+          <column title="Modifier">
+            <modifier/>
+          </column>
+          <column title="Last modified">
+            <xpath>@timestamp</xpath>
+          </column>
+        </browse>
+        <indexparameters>
+          <index name="iiid" xpath="contentdata/iiid"/>
+          <index name="score" xpath="contentdata/score"/>
+          <index name="product-target" xpath="contentdata/product-target"/>
+          <index name="company-target" xpath="contentdata/company-target"/>
+          <index name="url-target" xpath="contentdata/url-target"/>
+          <index name="productcomponent-target" xpath="contentdata/productcomponent-target"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1019" name="_Subscription">
+      <moduledata>
+        <config name="Subscription" version="1.0">
+          <form>
+            <title name="name"/>
+            <block name="Subscription">
+              <input name="active" required="true" type="checkbox">
+                <display>Active</display>
+                <xpath>contentdata/active</xpath>
+                <help>Subscription is active when checked</help>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
+              </input>
+              <input name="description" required="false" type="text">
+                <display>Description</display>
+                <xpath>contentdata/description</xpath>
+              </input>
+              <input multiple="false" name="filter" required="true" type="relatedcontent">
+                <display>Filter</display>
+                <xpath>contentdata/filter</xpath>
+                <contenttype name="Filter"/>
               </input>
             </block>
           </form>
         </config>
       </moduledata>
     </content-type>
-    <content-type name="event" key="1005">
+    <content-type key="1020" name="ProductComponent">
+      <moduledata>
+        <config name="ProductComponent" version="1.0">
+          <form>
+            <title name="iiid"/>
+            <block name="ProductComponent">
+              <input name="iiid" required="true" type="text">
+                <display>Informed individual id</display>
+                <xpath>contentdata/iiid</xpath>
+              </input>
+              <input name="type" required="true" type="dropdown">
+                <display>Type</display>
+                <xpath>contentdata/type</xpath>
+                <regexp>([ingredient])([additive])([nutrient])</regexp>
+                <options>
+                  <option>Choose</option>
+                  <option value="ingredient">Ingredient</option>
+                  <option value="nutrient">Nutrient</option>
+                  <option value="additive">Additive</option>
+                </options>
+              </input>
+            </block>
+            <block group="contentdata/ids/id" name="Ids">
+              <input name="id-type" required="false" type="dropdown">
+                <display>Id type</display>
+                <xpath>id-type</xpath>
+                <options>
+                  <option>Choose</option>
+                  <option value="chemspider-id">Chemspider ID</option>
+                  <option value="pubchem-id">Pubchem ID</option>
+                  <option value="e-number">E-number (additive)</option>
+                </options>
+              </input>
+              <input name="id" required="false" type="text">
+                <display>ID</display>
+                <xpath>id</xpath>
+              </input>
+            </block>
+            <block group="contentdata/names/name" name="Names">
+              <input name="name-type" required="true" type="dropdown">
+                <display>Name type</display>
+                <xpath>name-type</xpath>
+                <options>
+                  <option>Choose</option>
+                  <option value="common">Common name</option>
+                  <option value="iupak">IUPAC name</option>
+                  <option value="cas">CAS name</option>
+                  <option value="systematic">Systematic name</option>
+                  <option value="localized">Localized name</option>
+                </options>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
+              </input>
+              <input multiple="false" name="language" required="false" type="relatedcontent">
+                <display>Language</display>
+                <xpath>contentdata/language</xpath>
+                <contenttype name="Language"/>
+              </input>
+            </block>
+            <block name="Other info">
+              <input multiple="false" name="image" type="relatedcontent">
+                <display>Image</display>
+                <xpath>contentdata/image</xpath>
+                <contenttype name="Image"/>
+              </input>
+              <input name="molecular-formula" required="false" type="text">
+                <display>Molecular formula</display>
+                <xpath>contentdata/molecular-formula</xpath>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import base="/productcomponents/productcomponent" mode="xml" name="productcomponent-import" status="2" sync="iiid">
+              <mapping dest="iiid" src="iiid"/>
+              <mapping dest="type" src="type"/>
+              <block base="ids/id" dest="Ids" purge="true" sync="id-type">
+                <mapping dest="id-type" src="id-type"/>
+                <mapping dest="id" src="id"/>
+              </block>
+              <block base="names/name" dest="Names" purge="true" sync="name-type">
+                <mapping dest="name-type" src="name-type"/>
+                <mapping dest="name" src="name"/>
+                <mapping dest="language" relatedcontenttype="Language" relatedfield="name" src="language"/>
+              </block>
+              <mapping dest="image" relatedcontenttype="Image" relatedfield="name" src="image"/>
+              <mapping dest="molecular-formula" src="molecular-formula"/>
+            </import>
+          </imports>
+        </config>
+        <browse>
+          <column clickable="true" title="iiid">
+            <xpath>contentdata/iiid</xpath>
+          </column>
+          <column clickable="true" title="Molecular formula">
+            <xpath>contentdata/molecular-formula</xpath>
+          </column>
+          <column clickable="true" title="Published from">
+            <xpath>@publishfrom</xpath>
+          </column>
+          <column clickable="true" title="Last modified">
+            <xpath>@timestamp</xpath>
+          </column>
+          <column clickable="true" title="Owner">
+            <owner/>
+          </column>
+          <column clickable="true" title="Modifier">
+            <modifier/>
+          </column>
+        </browse>
+        <indexparameters>
+          <index name="iiid" xpath="contentdata/iiid"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1021" name="Language">
+      <moduledata>
+        <config name="Language" version="1.0">
+          <form>
+            <title name="name"/>
+            <block name="Language">
+              <input name="iso-639-1" required="false" type="text">
+                <display>iso-639-1</display>
+                <xpath>contentdata/iso-639-1</xpath>
+              </input>
+              <input name="iso-639-2" required="true" type="text">
+                <display>iso-639-2</display>
+                <xpath>contentdata/iso-639-2</xpath>
+              </input>
+              <input name="name" required="true" type="text">
+                <display>Name</display>
+                <xpath>contentdata/name</xpath>
+              </input>
+            </block>
+          </form>
+          <imports>
+            <import mode="csv" name="languages-import" purge="delete" separator="|" skip="2" sync="name">
+              <mapping dest="name" src="1"/>
+              <mapping dest="iso-639-1" src="2"/>
+              <mapping dest="iso-639-2" src="3"/>
+            </import>
+          </imports>
+        </config>
+        <browse>
+          <column clickable="true" title="name">
+            <xpath>contentdata/name</xpath>
+          </column>
+          <column clickable="true" title="iso-639-1">
+            <xpath>contentdata/iso-639-1</xpath>
+          </column>
+          <column clickable="true" title="iso-639-2">
+            <xpath>contentdata/iso-639-2</xpath>
+          </column>
+        </browse>
+        <indexparameters>
+          <index name="name" xpath="contentdata/name"/>
+          <index name="iso-639-1" xpath="contentdata/iso-639-1"/>
+          <index name="iso-639-2" xpath="contentdata/iso-639-2"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1022" name="webarticle">
       <moduledata>
         <config>
           <form>
-            <title name="heading" />
-            <block name="Event">
+            <title name="heading"/>
+            <block name="Article">
+              <input name="language" required="true" type="relatedcontent">
+                <display>Language</display>
+                <xpath>contentdata/language</xpath>
+                <contenttype name="language"/>
+              </input>
               <input name="heading" required="true" type="text">
                 <display>Heading</display>
                 <xpath>contentdata/heading</xpath>
-              </input>
-              <input name="start-date" required="true" type="date">
-                <display>Start date</display>
-                <xpath>contentdata/start-date</xpath>
-              </input>
-              <input name="start-time" type="text">
-                <display>Start time</display>
-                <xpath>contentdata/start-time</xpath>
-                <help>hh:mm (24 hours format)</help>
-                <regexp>^([0-1]\d|2[0-3]):([0-5]\d)$</regexp>
-                <size value="5" />
-                <maxlength value="5" />
-              </input>
-              <input name="end-date" required="true" type="date">
-                <display>End date</display>
-                <xpath>contentdata/end-date</xpath>
-              </input>
-              <input name="end-time" type="text">
-                <display>End time</display>
-                <xpath>contentdata/end-time</xpath>
-                <help>hh:mm (24 hours format)</help>
-                <regexp>^([0-1]\d|2[0-3]):([0-5]\d)$</regexp>
-                <size value="5" />
-                <maxlength value="5" />
-              </input>
-              <input name="location" type="text">
-                <display>Location</display>
-                <xpath>contentdata/location</xpath>
               </input>
               <input name="preface" type="textarea">
                 <display>Preface</display>
@@ -1411,225 +2109,232 @@
                 <display>Text</display>
                 <xpath>contentdata/text</xpath>
               </input>
-            </block>
-            <block group="contentdata/image" name="Image">
-              <input name="image" type="image">
-                <display>Image</display>
-                <xpath>image</xpath>
+              <input name="meta-keywords" type="text">
+                <display>Meta keywords</display>
+                <xpath>contentdata/meta-keywords</xpath>
+                <help>Comma separated</help>
               </input>
-              <input name="image_text" type="textarea">
-                <display>Image text</display>
-                <xpath>image_text</xpath>
-              </input>
-            </block>
-            <block group="contentdata/link" name="Related link">
-              <input name="url" type="url">
-                <display>URL</display>
-                <xpath>url</xpath>
-              </input>
-              <input name="description" type="text">
-                <display>Description</display>
-                <xpath>description</xpath>
-              </input>
-              <input name="destination" type="dropdown">
-                <display>Open in</display>
-                <xpath>target</xpath>
-                <options>
-                  <option value="new">New window</option>
-                  <option value="current">Current window</option>
-                </options>
+              <input name="meta-description" type="textarea">
+                <display>Meta description</display>
+                <xpath>contentdata/meta-description</xpath>
               </input>
             </block>
-            <block group="contentdata/file" name="Related file">
-              <input name="file" type="file">
-                <display>File</display>
-                <xpath>file</xpath>
+            <block group="contentdata/translations" name="Translations">
+              <input name="translation-language" required="false" type="relatedcontent">
+                <display>Language</display>
+                <xpath>translation-language</xpath>
+                <contenttype name="Language"/>
               </input>
-            </block>
-            <block name="Related articles">
-              <input name="articles" type="relatedcontent">
-                <display>Articles</display>
-                <xpath>contentdata/articles</xpath>
-                <contenttype name="article" />
-              </input>
-            </block>
-            <block name="Related events">
-              <input name="events" type="relatedcontent">
-                <display>Events</display>
-                <xpath>contentdata/events</xpath>
-                <contenttype name="event" />
+              <input name="translation" type="relatedcontent">
+                <display>Translation</display>
+                <xpath>contentdata/translation</xpath>
+                <contenttype name="webarticle"/>
               </input>
             </block>
           </form>
         </config>
-        <browse>
-          <column>
-            <title />
-          </column>
-          <column title="Start date">
-            <date xpath="contentdata/start-date" />
-          </column>
-          <column title="Location">
-            <xpath>contentdata/location</xpath>
-          </column>
-          <column>
-            <created />
-          </column>
-        </browse>
-        <indexparameters>
-          <index name="start-date" xpath="contentdata/start-date" />
-          <index name="end-date" xpath="contentdata/end-date" />
-        </indexparameters>
       </moduledata>
     </content-type>
-    <content-type name="comment" key="1009">
+    <content-type key="1023" name="ArticleSection">
       <moduledata>
         <config>
           <form>
-            <title name="name" />
-            <block name="Comment">
+            <title name="meta-name"/>
+            <block name="Meta information">
+              <input name="meta-name" required="true" type="text">
+                <display>Meta name</display>
+                <xpath>contentdata/meta-name</xpath>
+              </input>
+              <input name="meta-description" type="textarea">
+                <display>Meta description</display>
+                <xpath>contentdata/meta-description</xpath>
+              </input>
+              <input name="meta-keywords" type="text">
+                <display>Meta keywords</display>
+                <xpath>contentdata/meta-keywords</xpath>
+                <help>Comma separated</help>
+              </input>
+            </block>
+            <block name="ArticleSection">
+              <input name="section-heading" required="false" type="text">
+                <display>Heading</display>
+                <xpath>contentdata/section-heading</xpath>
+              </input>
+              <input name="section-tagline" required="false" type="text">
+                <display>Tagline</display>
+                <xpath>contentdata/section-tagline</xpath>
+              </input>
+              <input config="section-document" height="150" mode="xhtml" name="text" required="false" type="htmlarea" width="500">
+                <display>Text</display>
+                <xpath>contentdata/section-document</xpath>
+              </input>
+            </block>
+            <block group="contentdata/rows/row" name="ArticleRows">
+              <input multiple="true" name="articles" type="relatedcontent">
+                <display>Articles</display>
+                <xpath>articles</xpath>
+                <contenttype name="Article"/>
+              </input>
+            </block>
+          </form>
+        </config>
+      </moduledata>
+    </content-type>
+    <content-type key="1024" name="leaderboard">
+      <moduledata>
+        <config>
+          <form>
+            <title name="score"/>
+            <block name="Leaderboard">
+              <input name="level" required="true" type="text" validate="integer">
+                <display>Level</display>
+                <xpath>contentdata/level</xpath>
+                <regexp>[1-999]</regexp>
+                <help>1-999</help>
+              </input>
+              <input name="stars" required="true" type="text" validate="integer">
+                <display>Stars</display>
+                <xpath>contentdata/stars</xpath>
+                <regexp>[1-5]</regexp>
+                <help>1-5</help>
+              </input>
+              <input name="score" required="true" type="text" validate="integer">
+                <display>Score</display>
+                <xpath>contentdata/score</xpath>
+              </input>
               <input name="name" required="true" type="text">
                 <display>Name</display>
                 <xpath>contentdata/name</xpath>
               </input>
-              <input name="email" required="true" type="text">
-                <display>E-mail</display>
-                <xpath>contentdata/email</xpath>
-              </input>
-              <input name="comment" required="true" type="textarea">
-                <display>Comment</display>
-                <xpath>contentdata/comment</xpath>
-              </input>
-            </block>
-            <block name="Commented content">
-              <input name="commented-content-heading" required="true" type="text">
-                <display>Commented content heading</display>
-                <xpath>contentdata/commented-content-heading</xpath>
-              </input>
-              <input multiple="false" name="commented-content" required="true" type="relatedcontent">
-                <display>Commented content</display>
-                <xpath>contentdata/commented-content</xpath>
-                <contenttype name="article" />
-                <contenttype name="video" />
-                <contenttype name="destination" />
-                <contenttype name="event" />
+              <input name="user-agent" required="false" type="text">
+                <display>User agent</display>
+                <xpath>contentdata/user-agent</xpath>
               </input>
             </block>
           </form>
         </config>
         <browse>
-          <column title="Commented content heading">
-            <xpath>contentdata/commented-content-heading</xpath>
-          </column>
-          <column title="Commented by">
+          <column clickable="true" title="Name">
             <xpath>contentdata/name</xpath>
           </column>
-          <column>
-            <created />
+          <column clickable="true" title="Level">
+            <xpath>contentdata/level</xpath>
+          </column>
+          <column clickable="true" title="Stars">
+            <xpath>contentdata/stars</xpath>
+          </column>
+          <column clickable="true" maincolumn="true" title="Score">
+            <xpath>contentdata/score</xpath>
           </column>
         </browse>
+        <indexparameters>
+          <index name="name" xpath="contentdata/name"/>
+          <index name="score" xpath="contentdata/score"/>
+          <index name="stars" xpath="contentdata/stars"/>
+          <index name="level" xpath="contentdata/level"/>
+        </indexparameters>
       </moduledata>
     </content-type>
-    <content-type name="video" key="1011">
+    <content-type key="1025" name="Searchquery">
       <moduledata>
-        <config>
+        <config name="Searchquery" version="1.0">
           <form>
-            <title name="title" />
-            <block name="Video">
-              <input name="title" required="true" type="text">
-                <display>Title</display>
-                <xpath>contentdata/title</xpath>
+            <title name="query"/>
+            <block name="Searchquery">
+              <input name="query" required="true" type="text">
+                <display>Query</display>
+                <xpath>contentdata/query</xpath>
               </input>
-              <input name="description" type="textarea">
-                <display>Description</display>
-                <xpath>contentdata/description</xpath>
+              <input name="hits" required="false" type="text">
+                <display>Hits</display>
+                <xpath>contentdata/hits</xpath>
               </input>
-              <input name="thumbnail" type="image">
-                <display>Thumbnail</display>
-                <xpath>contentdata/thumbnail</xpath>
+              <input name="contenttype" required="false" type="text">
+                <display>Contenttype</display>
+                <xpath>contentdata/contenttype</xpath>
               </input>
-              <input name="video" required="true" type="file">
-                <display>Video</display>
-                <xpath>contentdata/video</xpath>
-                <help>Supported formats: FLV, MP4, M4A, MOV, MP4V, 3GP and 3G2</help>
+              <input name="urlpattern" required="false" type="text">
+                <display>urlpattern</display>
+                <xpath>contentdata/urlpattern</xpath>
+              </input>
+              <input name="filters" required="false" type="text">
+                <display>Filters</display>
+                <xpath>contentdata/filters</xpath>
               </input>
             </block>
           </form>
         </config>
+        <indexparameters>
+          <index name="query" xpath="contentdata/query"/>
+          <index name="hits" xpath="contentdata/hits"/>
+        </indexparameters>
       </moduledata>
     </content-type>
-    <content-type name="flash" key="1010">
+    <content-type key="1016" name="File">
       <moduledata>
-        <config name="Flash" version="1.0">
-          <form>
-            <title name="title" />
-            <block name="Flash">
-              <input name="title" required="true" type="text">
-                <display>Title</display>
-                <xpath>contentdata/title</xpath>
-              </input>
-              <input name="file" required="true" type="file">
-                <display>Flash file (.swf)</display>
-                <xpath>contentdata/file</xpath>
-              </input>
-              <input name="version" required="true" type="text">
-                <display>Flash version</display>
-                <xpath>contentdata/version</xpath>
-                <default>9.0.0</default>
-              </input>
-              <input name="width" required="true" type="text">
-                <display>Width</display>
-                <xpath>contentdata/width</xpath>
-              </input>
-              <input name="height" required="true" type="text">
-                <display>Height</display>
-                <xpath>contentdata/height</xpath>
-              </input>
-              <input name="scale" type="checkbox">
-                <display>Automatic scaling</display>
-                <xpath>contentdata/scale</xpath>
-                <help>If this option is selected the flash will be scaled to fill the available width in the region it is placed. Width and height settings will be used to preserve the width-height ratio.</help>
-              </input>
-              <input name="image" required="true" type="image">
-                <display>Alternative image</display>
-                <xpath>contentdata/image</xpath>
-                <help>The alternative image will be displayed when falsh is not supported.</help>
-              </input>
-            </block>
-            <block group="contentdata/parameter" name="Flash parameters">
-              <input name="parameter-name" type="text">
-                <display>Parameter name</display>
-                <xpath>name</xpath>
-              </input>
-              <input name="parameter-value" type="text">
-                <display>Value</display>
-                <xpath>value</xpath>
-              </input>
-            </block>
-            <block group="contentdata/variable" name="Flash variables">
-              <input name="variable-name" type="text">
-                <display>Variable name</display>
-                <xpath>name</xpath>
-              </input>
-              <input name="variable-value" type="text">
-                <display>Value</display>
-                <xpath>value</xpath>
-              </input>
-            </block>
-            <block group="contentdata/attribute" name="Flash attributes">
-              <input name="attribute-name" type="text">
-                <display>Attribute name</display>
-                <xpath>name</xpath>
-              </input>
-              <input name="attribute-value" type="text">
-                <display>Value</display>
-                <xpath>value</xpath>
-              </input>
-            </block>
-          </form>
-        </config>
+        <browse>
+          <column maincolumn="true" orderby="contentdata/name">
+            <filename xpath="contentdata/name"/>
+          </column>
+          <column columnalign="center" title="Download" titlealign="center" width="100">
+            <binarylink newwindow="true" text="Download" xpath="@key"/>
+          </column>
+          <column columnalign="right" title="Filesize" titlealign="center" width="100">
+            <filesize xpath="contentdata/filesize"/>
+          </column>
+          <column>
+            <timestamp/>
+          </column>
+        </browse>
+        <indexparameters>
+          <index type="text" xpath="contentdata/name"/>
+          <index type="text" xpath="contentdata/description"/>
+          <index type="text" xpath="contentdata/keywords/keyword"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1011" name="Formbuilder">
+      <moduledata>
+        <browse>
+          <column>
+            <title/>
+          </column>
+          <column>
+            <contenttype/>
+          </column>
+          <column>
+            <timestamp/>
+          </column>
+        </browse>
+        <indexparameters>
+          <index type="text" xpath="contentdata/form/item/data"/>
+        </indexparameters>
+      </moduledata>
+    </content-type>
+    <content-type key="1012" name="Image">
+      <moduledata>
+        <browse>
+          <column maincolumn="true" orderby="title" title="Name">
+            <title/>
+          </column>
+          <column columnalign="center" title="Original size" titlealign="center" width="100">
+            <xpath>contentdata/images/image[@type = 'original']/width</xpath>
+            <text>x</text>
+            <xpath>contentdata/images/image[@type = 'original']/height</xpath>
+          </column>
+          <column>
+            <timestamp/>
+          </column>
+        </browse>
+        <indexparameters>
+          <index type="text" xpath="contentdata/name"/>
+          <index type="text" xpath="contentdata/description"/>
+          <index type="text" xpath="contentdata/photographer/@name"/>
+          <index type="text" xpath="contentdata/photographer/@email"/>
+          <index type="text" xpath="contentdata/copyright"/>
+          <index type="text" xpath="contentdata/keywords"/>
+        </indexparameters>
       </moduledata>
     </content-type>
   </content-types>
 </extract>
-
