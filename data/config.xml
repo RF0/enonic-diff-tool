@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations>
+    <configuration>
+        <source name="Demokit Test" file="../data/cms_extract-prod.xml"/>
+        <target name="Demokit Production" file="../data/cms_extract-test.xml" />
+        <out name="Demokit" file="../out/demokit.html" />
+    </configuration>    
+</configurations>

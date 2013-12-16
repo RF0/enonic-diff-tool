@@ -1,0 +1,72 @@
+body {
+    background-color: #827259;
+}
+div {
+	padding: 0.8em;
+   	margin: 0 0 0.8em 0;
+   	border: 1px solid #ccc;
+   	border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    -webkit-border-radius: 0.4em;
+}
+span {
+    display:block;
+    padding: 0.8em;
+   	margin: 0 0 0.8em 0;
+   	border: 1px solid #ccc;
+   	border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    -webkit-border-radius: 0.4em;
+}
+h3 {
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 2px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+td {
+    border: 1px solid white;
+    padding: 2px;
+}
+thead {
+    background-color: black;
+    color: white;
+}
+tr.error {
+	color: white;
+	background-color: red;
+}
+span.error {
+	color: white;
+	background-color: red;
+}
+div.config {
+    background-color: #ECC87A;
+}
+div.error {
+    color: white;
+    background-color: red;
+}
+div.contenttype {
+	margin-left: 20px;	    
+}
+div.site {
+	margin-left: 20px;
+    background-color: white;	
+}
+div.portlet {
+    margin-left: 20px;
+    background-color: #9D9B86;
+}
+div.pagetemplate {
+	margin-left: 20px;    
+    background-color: #9D9B86;
+}
+div.datasource {
+	margin-left: 20px;
+	background-color: #DCCCAA;
+}
+div.param {
+    margin-left: 20px;
+    background-color: #ececec; 
+}
